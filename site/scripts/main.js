@@ -317,122 +317,186 @@ const reviewsSwiperGis = new Swiper('.reviews-swiper-gis', {
 
 
 //  form
-
-
 const signupForm = document.getElementById('signupForm');
 const trainingType = document.getElementById('trainingType');
 const trainerGroup = document.getElementById('trainerGroup');
 const trainerSelect = document.getElementById('trainerSelect');
 const signupPhone = document.getElementById('signupPhone');
 const signupSubmitBtn = document.getElementById('signupSubmitBtn');
-const signupBtnText = signupSubmitBtn.querySelector('.btn-text');
+const signupBtnText = signupSubmitBtn ? signupSubmitBtn.querySelector('.btn-text') : null;
 const signupSuccessMessage = document.getElementById('signupSuccessMessage');
 const signupErrorMessage = document.getElementById('signupErrorMessage');
 
-const toggleTrainerField = () => {
-    const isIndividual = trainingType.value === 'Индивидуальная';
+if (
+    signupForm &&
+    trainingType &&
+    trainerGroup &&
+    trainerSelect &&
+    signupPhone &&
+    signupSubmitBtn &&
+    signupBtnText &&
+    signupSuccessMessage &&
+    signupErrorMessage
+) {
+    const toggleTrainerField = () => {
+        const isIndividual = trainingType.value === 'Индивидуальная';
 
-    trainerGroup.classList.toggle('active', isIndividual);
-    trainerSelect.disabled = !isIndividual;
-    trainerSelect.required = isIndividual;
+        trainerGroup.classList.toggle('active', isIndividual);
+        trainerSelect.disabled = !isIndividual;
+        trainerSelect.required = isIndividual;
 
-    if (!isIndividual) {
-        trainerSelect.selectedIndex = 0;
-    }
-};
+        if (!isIndividual) {
+            trainerSelect.selectedIndex = 0;
+        }
+    };
 
-trainingType.addEventListener('change', toggleTrainerField);
-toggleTrainerField();
+    const setStatus = (type, message) => {
+        signupSuccessMessage.classList.remove('active');
+        signupErrorMessage.classList.remove('active');
 
-const formatPhone = (value) => {
-    const digits = value.replace(/\D/g, '').slice(0, 11);
-
-    let normalized = digits;
-
-    if (normalized.startsWith('8')) {
-        normalized = '7' + normalized.slice(1);
-    }
-
-    if (!normalized.startsWith('7') && normalized.length > 0) {
-        normalized = '7' + normalized.slice(0, 10);
-    }
-
-    let result = '+7';
-
-    if (normalized.length > 1) {
-        result += ' (' + normalized.slice(1, 4);
-    }
-
-    if (normalized.length >= 5) {
-        result += ') ' + normalized.slice(4, 7);
-    }
-
-    if (normalized.length >= 8) {
-        result += '-' + normalized.slice(7, 9);
-    }
-
-    if (normalized.length >= 10) {
-        result += '-' + normalized.slice(9, 11);
-    }
-
-    return result;
-};
-
-signupPhone.addEventListener('input', (event) => {
-    event.target.value = formatPhone(event.target.value);
-});
-
-const getPhoneDigits = (value) => value.replace(/\D/g, '');
-
-signupForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    signupSuccessMessage.classList.remove('active');
-    signupErrorMessage.classList.remove('active');
-
-    const phoneDigits = getPhoneDigits(signupPhone.value);
-
-    if (phoneDigits.length !== 11 || !/^7\d{10}$/.test(phoneDigits)) {
-        signupErrorMessage.textContent = 'Введите корректный номер телефона в формате +7.';
-        signupErrorMessage.classList.add('active');
-        signupPhone.focus();
-        return;
-    }
-
-    if (trainingType.value === 'Индивидуальная' && !trainerSelect.value) {
-        signupErrorMessage.textContent = 'Выберите тренера для индивидуальной тренировки.';
-        signupErrorMessage.classList.add('active');
-        trainerSelect.focus();
-        return;
-    }
-
-    signupSubmitBtn.disabled = true;
-    signupBtnText.textContent = 'Отправка...';
-
-    try {
-        const formData = new FormData(signupForm);
-
-        const response = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
+        if (type === 'success') {
+            signupSuccessMessage.textContent = message;
             signupSuccessMessage.classList.add('active');
-            signupErrorMessage.classList.remove('active');
-            signupForm.reset();
-            toggleTrainerField();
-        } else {
-            signupErrorMessage.textContent = result.message || 'Не удалось отправить заявку. Попробуйте ещё раз.';
+        }
+
+        if (type === 'error') {
+            signupErrorMessage.textContent = message;
             signupErrorMessage.classList.add('active');
         }
-    } catch (error) {
-        signupErrorMessage.textContent = 'Ошибка сети. Проверьте подключение и попробуйте снова.';
-        signupErrorMessage.classList.add('active');
-    } finally {
-        signupSubmitBtn.disabled = false;
-        signupBtnText.textContent = 'Записаться на тренировку';
-    }
-});
+    };
+
+    const formatPhone = (value) => {
+        const digits = value.replace(/\D/g, '').slice(0, 11);
+
+        let normalized = digits;
+
+        if (normalized.startsWith('8')) {
+            normalized = '7' + normalized.slice(1);
+        }
+
+        if (!normalized.startsWith('7') && normalized.length > 0) {
+            normalized = '7' + normalized.slice(0, 10);
+        }
+
+        let result = '+7';
+
+        if (normalized.length > 1) {
+            result += ' (' + normalized.slice(1, 4);
+        }
+
+        if (normalized.length >= 5) {
+            result += ') ' + normalized.slice(4, 7);
+        }
+
+        if (normalized.length >= 8) {
+            result += '-' + normalized.slice(7, 9);
+        }
+
+        if (normalized.length >= 10) {
+            result += '-' + normalized.slice(9, 11);
+        }
+
+        return result;
+    };
+
+    const getPhoneDigits = (value) => value.replace(/\D/g, '');
+
+    trainingType.addEventListener('change', toggleTrainerField);
+
+    signupPhone.addEventListener('input', (event) => {
+        event.target.value = formatPhone(event.target.value);
+    });
+
+    toggleTrainerField();
+
+    signupForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        setStatus('', '');
+
+        const name = signupForm.name ? signupForm.name.value.trim() : '';
+        const phone = signupPhone.value.trim();
+        const phoneDigits = getPhoneDigits(phone);
+        const trainingTypeValue = trainingType.value.trim();
+        const trainerValue = trainerSelect.disabled ? '' : trainerSelect.value.trim();
+        const message = signupForm.message ? signupForm.message.value.trim() : '';
+
+        if (!name) {
+            setStatus('error', 'Введите ваше имя.');
+            if (signupForm.name) signupForm.name.focus();
+            return;
+        }
+
+        if (name.length < 2) {
+            setStatus('error', 'Имя слишком короткое.');
+            if (signupForm.name) signupForm.name.focus();
+            return;
+        }
+
+        if (phoneDigits.length !== 11 || !/^7\d{10}$/.test(phoneDigits)) {
+            setStatus('error', 'Введите корректный номер телефона в формате +7.');
+            signupPhone.focus();
+            return;
+        }
+
+        if (!trainingTypeValue) {
+            setStatus('error', 'Выберите тип тренировки.');
+            trainingType.focus();
+            return;
+        }
+
+        if (trainingTypeValue === 'Индивидуальная' && !trainerValue) {
+            setStatus('error', 'Выберите тренера для индивидуальной тренировки.');
+            trainerSelect.focus();
+            return;
+        }
+
+        signupSubmitBtn.disabled = true;
+        signupBtnText.textContent = 'Отправка...';
+
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    training_type: trainingTypeValue,
+                    trainer: trainerValue,
+                    message
+                })
+            });
+
+            let result = null;
+
+            try {
+                result = await response.json();
+            } catch {
+                result = null;
+            }
+
+            if (response.ok && result && result.success) {
+                setStatus(
+                    'success',
+                    result.message || 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.'
+                );
+
+                signupForm.reset();
+                toggleTrainerField();
+            } else {
+                setStatus(
+                    'error',
+                    (result && result.message) || 'Не удалось отправить заявку. Попробуйте ещё раз.'
+                );
+            }
+        } catch (error) {
+            console.error('Ошибка отправки формы:', error);
+            setStatus('error', 'Ошибка сети или сервера. Попробуйте ещё раз чуть позже.');
+        } finally {
+            signupSubmitBtn.disabled = false;
+            signupBtnText.textContent = 'Записаться на тренировку';
+        }
+    });
+}

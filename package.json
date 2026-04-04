@@ -1,0 +1,27 @@
+{
+  "name": "bronx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PabloAlligator/BRONX_SK_AB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PabloAlligator/BRONX_SK_AB/issues"
+  },
+  "homepage": "https://github.com/PabloAlligator/BRONX_SK_AB#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.4"
+  }
+}
