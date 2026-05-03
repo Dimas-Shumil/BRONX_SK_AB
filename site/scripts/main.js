@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-//  переключение окон филиалы 
+//  переключение окон филиалы
 
 
 const branchButtons = document.querySelectorAll('.branches-tabs__btn');
@@ -317,6 +317,8 @@ const reviewsSwiperGis = new Swiper('.reviews-swiper-gis', {
 
 
 //  form
+// form
+
 const signupForm = document.getElementById('signupForm');
 const trainingType = document.getElementById('trainingType');
 const trainerGroup = document.getElementById('trainerGroup');
@@ -338,6 +340,9 @@ if (
     signupSuccessMessage &&
     signupErrorMessage
 ) {
+    const formStartTime = Date.now();
+    let isSending = false;
+
     const toggleTrainerField = () => {
         const isIndividual = trainingType.value === 'Индивидуальная';
 
@@ -412,24 +417,24 @@ if (
     signupForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        if (isSending) return;
+
         setStatus('', '');
 
-        const name = signupForm.name ? signupForm.name.value.trim() : '';
-        const phone = signupPhone.value.trim();
+        const formData = new FormData(signupForm);
+
+        const name = String(formData.get('name') || '').trim();
+        const phone = String(formData.get('phone') || '').trim();
         const phoneDigits = getPhoneDigits(phone);
-        const trainingTypeValue = trainingType.value.trim();
-        const trainerValue = trainerSelect.disabled ? '' : trainerSelect.value.trim();
-        const message = signupForm.message ? signupForm.message.value.trim() : '';
+        const trainingTypeValue = String(formData.get('training_type') || '').trim();
+        const trainerValue = trainerSelect.disabled
+            ? ''
+            : String(formData.get('trainer') || '').trim();
+        const message = String(formData.get('message') || '').trim();
 
-        if (!name) {
-            setStatus('error', 'Введите ваше имя.');
-            if (signupForm.name) signupForm.name.focus();
-            return;
-        }
-
-        if (name.length < 2) {
-            setStatus('error', 'Имя слишком короткое.');
-            if (signupForm.name) signupForm.name.focus();
+        if (!name || name.length < 2 || name.length > 80) {
+            setStatus('error', 'Введите корректное имя.');
+            signupForm.name?.focus();
             return;
         }
 
@@ -445,12 +450,33 @@ if (
             return;
         }
 
+        if (!['Групповая', 'Индивидуальная'].includes(trainingTypeValue)) {
+            setStatus('error', 'Некорректный тип тренировки.');
+            return;
+        }
+
         if (trainingTypeValue === 'Индивидуальная' && !trainerValue) {
             setStatus('error', 'Выберите тренера для индивидуальной тренировки.');
             trainerSelect.focus();
             return;
         }
 
+        if (message.length > 900) {
+            setStatus('error', 'Комментарий слишком длинный. Максимум 900 символов.');
+            return;
+        }
+
+        const payload = {
+            name,
+            phone,
+            training_type: trainingTypeValue,
+            trainer: trainerValue,
+            message,
+            page: window.location.pathname,
+            form_time: formStartTime
+        };
+
+        isSending = true;
         signupSubmitBtn.disabled = true;
         signupBtnText.textContent = 'Отправка...';
 
@@ -460,41 +486,31 @@ if (
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    name,
-                    phone,
-                    training_type: trainingTypeValue,
-                    trainer: trainerValue,
-                    message
-                })
+                body: JSON.stringify(payload)
             });
 
-            let result = null;
+            const result = await response.json().catch(() => null);
 
-            try {
-                result = await response.json();
-            } catch {
-                result = null;
+            if (!response.ok || !result?.success) {
+                throw new Error(result?.message || 'Не удалось отправить заявку.');
             }
 
-            if (response.ok && result && result.success) {
-                setStatus(
-                    'success',
-                    result.message || 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.'
-                );
+            setStatus(
+                'success',
+                result.message || 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.'
+            );
 
-                signupForm.reset();
-                toggleTrainerField();
-            } else {
-                setStatus(
-                    'error',
-                    (result && result.message) || 'Не удалось отправить заявку. Попробуйте ещё раз.'
-                );
-            }
+            signupForm.reset();
+            toggleTrainerField();
         } catch (error) {
             console.error('Ошибка отправки формы:', error);
-            setStatus('error', 'Ошибка сети или сервера. Попробуйте ещё раз чуть позже.');
+
+            setStatus(
+                'error',
+                error.message || 'Ошибка соединения. Попробуйте ещё раз чуть позже.'
+            );
         } finally {
+            isSending = false;
             signupSubmitBtn.disabled = false;
             signupBtnText.textContent = 'Записаться на тренировку';
         }

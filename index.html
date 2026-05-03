@@ -1,944 +1,1179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="site/img/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="site/styles/main.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="site/img/Logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="site/styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <title>БРОНКС</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header class="header">
-        <div class="header__logo">
-            <a href="#home">
-                <img src="site/img/Logo.png" alt="Logo">
-            </a>
-        </div>
+      <div class="header__logo">
+        <a href="#home">
+          <img src="site/img/Logo.png" alt="Logo" />
+        </a>
+      </div>
 
-        <nav class="header__nav header__nav--desktop">
-            <ul>
-                <li><a href="#descriptions">НАПРАВЛЕНИЯ</a></li>
-                <li><a href="#coach">ТРЕНЕРЫ</a></li>
-                <li><a href="#about">О КЛУБЕ</a></li>
-                <li><a href="#reviews">ОТЗЫВЫ</a></li>
-                <li><a href="#branches">ФИЛИАЛЫ</a></li>
-                <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
-            </ul>
-        </nav>
+      <nav class="header__nav header__nav--desktop">
+        <ul>
+          <li><a href="#descriptions">НАПРАВЛЕНИЯ</a></li>
+          <li><a href="#coach">ТРЕНЕРЫ</a></li>
+          <li><a href="#about">О КЛУБЕ</a></li>
+          <li><a href="#reviews">ОТЗЫВЫ</a></li>
+          <li><a href="#branches">ФИЛИАЛЫ</a></li>
+          <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
+        </ul>
+      </nav>
 
-        <button class="header__burger" type="button" aria-label="Открыть меню">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+      <button class="header__burger" type="button" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <div class="mobile-menu-overlay"></div>
 
     <nav class="mobile-menu">
-        <ul>
-            <li><a href="#descriptions">НАПРАВЛЕНИЯ</a></li>
-            <li><a href="#coach">ТРЕНЕРЫ</a></li>
-            <li><a href="#about">О КЛУБЕ</a></li>
-            <li><a href="#reviews">ОТЗЫВЫ</a></li>
-            <li><a href="#branches">ФИЛИАЛЫ</a></li>
-            <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
-        </ul>
+      <ul>
+        <li><a href="#descriptions">НАПРАВЛЕНИЯ</a></li>
+        <li><a href="#coach">ТРЕНЕРЫ</a></li>
+        <li><a href="#about">О КЛУБЕ</a></li>
+        <li><a href="#reviews">ОТЗЫВЫ</a></li>
+        <li><a href="#branches">ФИЛИАЛЫ</a></li>
+        <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
+      </ul>
     </nav>
 
     <!-- hero -->
     <section class="hero" id="home">
-        <video class="hero__video" autoplay muted loop playsinline>
-            <source src="site/video/herovideo3.MOV" type="video/mp4">
-        </video>
+      <video class="hero__video" autoplay muted loop playsinline>
+        <source src="site/video/herovideo3.MOV" type="video/mp4" />
+      </video>
 
-        <div class="hero__overlay"></div>
+      <div class="hero__overlay"></div>
 
-        <div class="hero-container">
-
-            <img src="site/img/Logo.png"
-                alt="Спортивный клуб Бронкс в Абакане. Тренировки по ММа, боксу, кикбоксингу, борьбе в Абакане.">
-            <a href="#signup" class="btn btn-primary">ЗАПИСАТЬСЯ НА ТРЕНИРОВКУ</a>
-        </div>
+      <div class="hero-container">
+        <img
+          src="site/img/Logo.png"
+          alt="Спортивный клуб Бронкс в Абакане. Тренировки по ММа, боксу, кикбоксингу, борьбе в Абакане."
+        />
+        <a href="#signup" class="btn btn-primary">ЗАПИСАТЬСЯ НА ТРЕНИРОВКУ</a>
+      </div>
     </section>
 
     <!-- направления -->
 
     <section class="directions about--glow" id="descriptions">
-        <div class="directions-container">
-
-            <div class="general-title">
-                <h2>НАПРАВЛЕНИЯ</h2>
-            </div>
-
-            <div class="directions-elements">
-                <div class="directions-elements__item">
-                    <div class="directions-elements__image">
-                        <img src="site/img/boxing.webp" alt="БОКС">
-                    </div>
-                    <h4>БОКС</h4>
-                </div>
-
-                <div class="directions-elements__item">
-                    <div class="directions-elements__image">
-                        <img src="site/img/mma.png" alt="БОКС">
-                    </div>
-                    <h4>MMA</h4>
-                </div>
-
-                <div class="directions-elements__item">
-                    <div class="directions-elements__image">
-                        <img src="site/img/bjj4.PNG" alt="БОКС">
-                    </div>
-                    <h4>БРАЗИЛЬСКОЕ ДЖИУ-ДЖИТСУ И ГРЕППЛИНГ</h4>
-                </div>
-
-                <div class="directions-elements__item">
-                    <div class="directions-elements__image">
-                        <img src="site/img/kick.PNG" alt="БОКС">
-                    </div>
-                    <h4>КИКБОКСИНГ</h4>
-                </div>
-            </div>
+      <div class="directions-container">
+        <div class="general-title">
+          <h2>НАПРАВЛЕНИЯ</h2>
         </div>
+
+        <div class="directions-elements">
+          <div class="directions-elements__item">
+            <div class="directions-elements__image">
+              <img src="site/img/boxing.webp" alt="БОКС" />
+            </div>
+            <h4>БОКС</h4>
+          </div>
+
+          <div class="directions-elements__item">
+            <div class="directions-elements__image">
+              <img src="site/img/mma.png" alt="БОКС" />
+            </div>
+            <h4>MMA</h4>
+          </div>
+
+          <div class="directions-elements__item">
+            <div class="directions-elements__image">
+              <img src="site/img/bjj4.PNG" alt="БОКС" />
+            </div>
+            <h4>БРАЗИЛЬСКОЕ ДЖИУ-ДЖИТСУ И ГРЕППЛИНГ</h4>
+          </div>
+
+          <div class="directions-elements__item">
+            <div class="directions-elements__image">
+              <img src="site/img/kick.PNG" alt="БОКС" />
+            </div>
+            <h4>КИКБОКСИНГ</h4>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- about -->
 
     <secction class="about" id="about">
-        <div class="about-container">
+      <div class="about-container">
+        <div class="about-text">
+          <div class="general-title">
+            <h2>О КЛУБЕ</h2>
+            <h3>АТМОСФЕРА СИЛЫ И ПОБЕДЫ</h3>
+          </div>
+          <p>БРОНКС — это команда.</p>
 
-            <div class="about-text">
-                <div class="general-title">
-                    <h2>О КЛУБЕ</h2>
-                    <h3>АТМОСФЕРА СИЛЫ И ПОБЕДЫ</h3>
-                </div>
-                <p>
-                    БРОНКС — это команда.
-                </p>
+          <p>
+            Здесь ты не один на пути к результату. С первых тренировок ты
+            попадаешь в среду, где поддерживают, подсказывают и двигаются вперед
+            вместе с тобой.
+          </p>
 
-                <p>
-                    Здесь ты не один на пути к результату.
-                    С первых тренировок ты попадаешь в среду, где поддерживают, подсказывают и двигаются вперед вместе с
-                    тобой.
-                </p>
+          <p>
+            Атмосфера клуба — это энергия людей, которые работают над собой
+            каждый день. Новички быстро втягиваются, а опытные спортсмены
+            продолжают расти — потому что рядом всегда есть те, кто мотивирует
+            не словами, а действиями.
+          </p>
 
-                <p>
-                    Атмосфера клуба — это энергия людей, которые работают над собой каждый день.
-                    Новички быстро втягиваются, а опытные спортсмены продолжают расти — потому что рядом всегда есть те,
-                    кто мотивирует не словами, а действиями.
-                </p>
+          <p>
+            Тренеры не просто обучают — они ведут, направляют и помогают
+            раскрыть твой максимум.
+          </p>
 
-                <p>
-                    Тренеры не просто обучают — они ведут, направляют и помогают раскрыть твой максимум.
-                </p>
+          <p>
+            БРОНКС — это место, где становятся сильнее, находят уверенность, и
+            становятся частью настоящей команды.
+          </p>
 
-                <p>
-                    БРОНКС — это место, где
-                    становятся сильнее,
-                    находят уверенность,
-                    и становятся частью настоящей команды.
-                </p>
-
-                <p>
-                    <span>
-                        Один зал. Одна энергия. Один результат.
-                    </span>
-                </p>
-            </div>
-
-            <div class="about-image">
-                <img src="site/img/atmosphere.jpg" alt="Атмосфера клуба">
-            </div>
+          <p>
+            <span> Один зал. Одна энергия. Один результат. </span>
+          </p>
         </div>
+
+        <div class="about-image">
+          <img src="site/img/atmosphere.jpg" alt="Атмосфера клуба" />
+        </div>
+      </div>
     </secction>
 
     <!-- тренеры -->
 
     <section class="coach" id="coach">
-        <div class="coach-container">
-            <div class="general-title">
-                <h2>ТРЕНЕРЫ</h2>
-                <h3>ВАШИ НАСТАВНИКИ</h3>
-            </div>
-
-            <div class="coach-slider swiper">
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Данила Иванов" data-photo="site/img/coach/DIVANOV.JPG"
-                            data-role="Вице-Президент ММА ХАКАСИИ | Главный трененр"
-                            data-achievements="Образование высшее юридическое | Повышение квалификации тренер-преподаватель | Пурпурный пояс от PIRATES ACADEMY | КМС по военно-спортивному комплексу"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                            data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/DIVANOV.JPG" alt="Данила Иванов">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Данила Иванов</h4>
-                                <p>Вице-Президент ММА ХАКАСИИ | Главный тренер</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Наталья Панкова" data-photo="site/img/coach/NPANKOVA.jpg"
-                            data-role="Тренер по кикбоксингу"
-                            data-achievements="Высшее образование | Мастер спорта России международного класса по кикбоксингу |Шестикратная чемпионка России по кикбоксингу 2018-2023 | Чемпионка мира по кикбоксингу 2019 | Финалистка чемпионата Европы по кикбоксингу 2018г."
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                            data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/NPANKOVA.jpg" alt="Наталья Панкова">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Наталья Панкова</h4>
-                                <p>Тренер по кикбоксингу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Михаил Болганов"
-                            data-photo="site/img/coach/MBOLGANOV.jpg" data-role="Тренер по ММА"
-                            data-achievements="Высшее образование | Мастер спорта России по спортивной борьбе, КМС по армейскому рукопашному бою | КМС по рукопашному бою | КМС по КЕ | Чемпион Сибири (СФО) по ММА, панкрутиону, грепплингу, КЕ | Финалист чемпионата России по спортивной ьорьбе Панкратион | Член сборной России 2024 по спортивной борьбе  панкратион"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                            data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/MBOLGANOV.jpg" alt="Михаил Болганов">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Михаил Болганов</h4>
-                                <p>Тренер по ММА</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Анна Логачева" data-photo="site/img/coach/ALOGACHEVA.jpg"
-                            data-role="Тренер по грэпплингу"
-                            data-achievements="Среднее профессиональное образование | КМС по кикбоксингу | Победитель России | Трехкратная Чемпионка Сибирского федерального окргуа | Обладатель кубка России | Финалист международных соревнованиий | Двухкратный призер Чемпионата России"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                            data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/ALOGACHEVA.jpg" alt="Анна Логачева">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Анна Логачева</h4>
-                                <p>Тренер по кикбоксингу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Никита Лесников"
-                            data-photo="site/img/coach/NLESNIKOV.jpg" data-role="Тренер по BJJ и грэпплингу"
-                            data-achievements="Высшее образование СГУ физической культуры и спорта г. Омск, спеицальность: тренер | Чемпион Омской области по ММА 2022г. | Серебряный призер Омской области по мма 2023г. | Бронозвый призер Всероссийского турнира &laquo;Кубок Ермака&raquo; 2022г. | Победитель различных турниров по грепплингу в Омске, Абакане, Красноярске, Новосибирску | Пурпурный пояс по BJJ от PIRATES ACADEMY"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                            data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/NLESNIKOV.jpg" alt="Никита Лесников">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Никита Лесников</h4>
-                                <p>Тренер по BJJ и грэпплингу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Каюмов Александр" data-photo="site/img/coach/AKAUMOV.jpg"
-                            data-role="Тренер по Боксу"
-                            data-achievements="Образование среднее | ХТИ курсы переквалификация | КМС по боксу | Финалист первенства Сибири и Дальнего Востока"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g" data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/AKAUMOV.jpg" alt="Каюмов Александр">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Каюмов Александр</h4>
-                                <p>Тренер по Боксу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Вячеслав Ардамин" data-photo="site/img/coach/VARDAMIN.jpg"
-                            data-role="Тренер по BJJ и грэпплингу"
-                            data-achievements="Образование высшее | Курсы профессиональной переподготовки | Неоднократный победитель и призер турниров по бразильскому джиу-джитсу, традиционному джиу-джитсу, раздел  &laquo;Не-ваза&raquo;, грепплингу, самбо | Пурпурный пояс по бразильскому джиу-джитсу от PIRATES ACADEMY"
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g" data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/VARDAMIN.jpg" alt="Вячеслав Ардамин">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Вячеслав Ардамин</h4>
-                                <p>Тренер по BJJ и грэпплингу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Денис Коржавин" data-photo="site/img/coach/DCORZHAVIN.jpg"
-                            data-role="Тренер по боксу"
-                            data-achievements="Образование высшее: Тувинский госсударственный университет. Специальность: физическая культура | КМС по боксу и кикбоксингу | Призер Кубка России по кикбоксингу 2008г. | Призер Международнгого турнира по боксу 2013г."
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g" data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/DCORZHAVIN.jpg" alt="Денис Коржавин">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Денис Коржавин</h4>
-                                <p>Тренер по боксу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <article class="coach-card" data-name="Николай Чумаков" data-photo="site/img/coach/NCHUMAKOV.png"
-                            data-role="Тренер по боксу"
-                            data-achievements="Образование высшее: Тувинский госсударственный университет. Специальность: физическая культура | КМС по боксу и кикбоксингу | Призер Кубка России по кикбоксингу 2008г. | Призер Международнгого турнира по боксу 2013г."
-                            data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g" data-inst="https://instagram.com/" data-tg="https://t.me/">
-                            <div class="coach-card__image">
-                                <img src="site/img/coach/NCHUMAKOV.png" alt="Николай Чумаков">
-                            </div>
-
-                            <div class="coach-card__content">
-                                <h4>Николай Чумаков</h4>
-                                <p>Тренер по боксу</p>
-                            </div>
-                        </article>
-                    </div>
-
-                </div>
-
-                <div class="coach-slider__nav">
-                    <button class="coach-slider__btn coach-slider__btn--prev" type="button" aria-label="Назад">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M15 6L9 12L15 18" />
-                        </svg>
-                    </button>
-
-                    <button class="coach-slider__btn coach-slider__btn--next" type="button" aria-label="Вперед">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M9 6L15 12L9 18" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+      <div class="coach-container">
+        <div class="general-title">
+          <h2>ТРЕНЕРЫ</h2>
+          <h3>ВАШИ НАСТАВНИКИ</h3>
         </div>
 
-        <!-- ОДНА ОБЩАЯ МОДАЛКА -->
-        <div class="coach-modal" id="coachModal">
-            <div class="coach-modal__overlay"></div>
-
-            <div class="coach-modal__body">
-                <button class="coach-modal__close" type="button">×</button>
-
-                <div class="coach-modal__scroll">
-                    <div class="coach-modal__image">
-                        <img id="coachModalPhoto" src="" alt="">
-                    </div>
-
-                    <div class="coach-modal__content">
-                        <span class="coach-modal__badge">Тренерский состав</span>
-                        <h3 class="coach-modal__title" id="coachModalName"></h3>
-                        <p class="coach-modal__role" id="coachModalRole"></p>
-
-                        <div class="coach-modal__achievements">
-                            <h4>Достижения</h4>
-                            <ul id="coachModalAchievements"></ul>
-                        </div>
-
-                        <div class="coach-modal__socials">
-                            <a id="coachModalVk" href="#" target="_blank" rel="noopener noreferrer">VK</a>
-                            <a id="coachModalInst" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
-                            <a id="coachModalTg" href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
-                        </div>
-
-                        <a href="#signup" class="coach-modal__btn">Записаться</a>
-                    </div>
+        <div class="coach-slider swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Данила Иванов"
+                data-photo="site/img/coach/DIVANOV.JPG"
+                data-role="Вице-Президент ММА ХАКАСИИ | Главный трененр"
+                data-achievements="Образование высшее юридическое | Повышение квалификации тренер-преподаватель | Пурпурный пояс от PIRATES ACADEMY | КМС по военно-спортивному комплексу"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img src="site/img/coach/DIVANOV.JPG" alt="Данила Иванов" />
                 </div>
+
+                <div class="coach-card__content">
+                  <h4>Данила Иванов</h4>
+                  <p>Вице-Президент ММА ХАКАСИИ | Главный тренер</p>
+                </div>
+              </article>
             </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Наталья Панкова"
+                data-photo="site/img/coach/NPANKOVA.jpg"
+                data-role="Тренер по кикбоксингу"
+                data-achievements="Высшее образование | Мастер спорта России международного класса по кикбоксингу |Шестикратная чемпионка России по кикбоксингу 2018-2023 | Чемпионка мира по кикбоксингу 2019 | Финалистка чемпионата Европы по кикбоксингу 2018г."
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/NPANKOVA.jpg"
+                    alt="Наталья Панкова"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Наталья Панкова</h4>
+                  <p>Тренер по кикбоксингу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Михаил Болганов"
+                data-photo="site/img/coach/MBOLGANOV.jpg"
+                data-role="Тренер по ММА"
+                data-achievements="Высшее образование | Мастер спорта России по спортивной борьбе, КМС по армейскому рукопашному бою | КМС по рукопашному бою | КМС по КЕ | Чемпион Сибири (СФО) по ММА, панкрутиону, грепплингу, КЕ | Финалист чемпионата России по спортивной ьорьбе Панкратион | Член сборной России 2024 по спортивной борьбе  панкратион"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/MBOLGANOV.jpg"
+                    alt="Михаил Болганов"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Михаил Болганов</h4>
+                  <p>Тренер по ММА</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Анна Логачева"
+                data-photo="site/img/coach/ALOGACHEVA.jpg"
+                data-role="Тренер по грэпплингу"
+                data-achievements="Среднее профессиональное образование | КМС по кикбоксингу | Победитель России | Трехкратная Чемпионка Сибирского федерального окргуа | Обладатель кубка России | Финалист международных соревнованиий | Двухкратный призер Чемпионата России"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/ALOGACHEVA.jpg"
+                    alt="Анна Логачева"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Анна Логачева</h4>
+                  <p>Тренер по кикбоксингу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Никита Лесников"
+                data-photo="site/img/coach/NLESNIKOV.jpg"
+                data-role="Тренер по BJJ и грэпплингу"
+                data-achievements="Высшее образование СГУ физической культуры и спорта г. Омск, спеицальность: тренер | Чемпион Омской области по ММА 2022г. | Серебряный призер Омской области по мма 2023г. | Бронозвый призер Всероссийского турнира &laquo;Кубок Ермака&raquo; 2022г. | Победитель различных турниров по грепплингу в Омске, Абакане, Красноярске, Новосибирску | Пурпурный пояс по BJJ от PIRATES ACADEMY"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/NLESNIKOV.jpg"
+                    alt="Никита Лесников"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Никита Лесников</h4>
+                  <p>Тренер по BJJ и грэпплингу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Каюмов Александр"
+                data-photo="site/img/coach/AKAUMOV.jpg"
+                data-role="Тренер по Боксу"
+                data-achievements="Образование среднее | ХТИ курсы переквалификация | КМС по боксу | Финалист первенства Сибири и Дальнего Востока"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/AKAUMOV.jpg"
+                    alt="Каюмов Александр"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Каюмов Александр</h4>
+                  <p>Тренер по Боксу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Вячеслав Ардамин"
+                data-photo="site/img/coach/VARDAMIN.jpg"
+                data-role="Тренер по BJJ и грэпплингу"
+                data-achievements="Образование высшее | Курсы профессиональной переподготовки | Неоднократный победитель и призер турниров по бразильскому джиу-джитсу, традиционному джиу-джитсу, раздел  &laquo;Не-ваза&raquo;, грепплингу, самбо | Пурпурный пояс по бразильскому джиу-джитсу от PIRATES ACADEMY"
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/VARDAMIN.jpg"
+                    alt="Вячеслав Ардамин"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Вячеслав Ардамин</h4>
+                  <p>Тренер по BJJ и грэпплингу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Денис Коржавин"
+                data-photo="site/img/coach/DCORZHAVIN.jpg"
+                data-role="Тренер по боксу"
+                data-achievements="Образование высшее: Тувинский госсударственный университет. Специальность: физическая культура | КМС по боксу и кикбоксингу | Призер Кубка России по кикбоксингу 2008г. | Призер Международнгого турнира по боксу 2013г."
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/DCORZHAVIN.jpg"
+                    alt="Денис Коржавин"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Денис Коржавин</h4>
+                  <p>Тренер по боксу</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article
+                class="coach-card"
+                data-name="Николай Чумаков"
+                data-photo="site/img/coach/NCHUMAKOV.png"
+                data-role="Тренер по боксу"
+                data-achievements="Образование высшее: Тувинский госсударственный университет. Специальность: физическая культура | КМС по боксу и кикбоксингу | Призер Кубка России по кикбоксингу 2008г. | Призер Международнгого турнира по боксу 2013г."
+                data-vk="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+                data-inst="https://instagram.com/"
+                data-tg="https://t.me/"
+              >
+                <div class="coach-card__image">
+                  <img
+                    src="site/img/coach/NCHUMAKOV.png"
+                    alt="Николай Чумаков"
+                  />
+                </div>
+
+                <div class="coach-card__content">
+                  <h4>Николай Чумаков</h4>
+                  <p>Тренер по боксу</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="coach-slider__nav">
+            <button
+              class="coach-slider__btn coach-slider__btn--prev"
+              type="button"
+              aria-label="Назад"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 6L9 12L15 18" />
+              </svg>
+            </button>
+
+            <button
+              class="coach-slider__btn coach-slider__btn--next"
+              type="button"
+              aria-label="Вперед"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6L15 12L9 18" />
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
+
+      <!-- ОДНА ОБЩАЯ МОДАЛКА -->
+      <div class="coach-modal" id="coachModal">
+        <div class="coach-modal__overlay"></div>
+
+        <div class="coach-modal__body">
+          <button class="coach-modal__close" type="button">×</button>
+
+          <div class="coach-modal__scroll">
+            <div class="coach-modal__image">
+              <img id="coachModalPhoto" src="" alt="" />
+            </div>
+
+            <div class="coach-modal__content">
+              <span class="coach-modal__badge">Тренерский состав</span>
+              <h3 class="coach-modal__title" id="coachModalName"></h3>
+              <p class="coach-modal__role" id="coachModalRole"></p>
+
+              <div class="coach-modal__achievements">
+                <h4>Достижения</h4>
+                <ul id="coachModalAchievements"></ul>
+              </div>
+
+              <div class="coach-modal__socials">
+                <a
+                  id="coachModalVk"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >VK</a
+                >
+                <a
+                  id="coachModalInst"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Instagram</a
+                >
+                <a
+                  id="coachModalTg"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Telegram</a
+                >
+              </div>
+
+              <a href="#signup" class="coach-modal__btn">Записаться</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- филиалы -->
 
     <section class="branches" id="branches">
-        <div class="branches-container">
-            <div class="general-title">
-                <h2>ФИЛИАЛЫ</h2>
-                <h3>ВЫБЕРИТЕ УДОБНЫЙ ЗАЛ ДЛЯ ТРЕНИРОВОК</h3>
-            </div>
-
-            <div class="branches-tabs">
-                <button class="branches-tabs__btn active" type="button" data-branch="abakan">
-                    АБАКАН
-                </button>
-                <button class="branches-tabs__btn" type="button" data-branch="kalinino">
-                    КАЛИНИНО
-                </button>
-            </div>
-
-            <div class="branches-content">
-                <!-- Абакан -->
-                <div class="branches-pane active" id="branch-abakan">
-                    <div class="branches-card">
-                        <div class="branches-card__content">
-                            <span class="branches-card__label">Филиал БРОНКС</span>
-                            <h4>Абакан</h4>
-
-                            <div class="branches-card__info">
-                                <div class="branches-card__item">
-                                    <span>Адрес</span>
-                                    <p>г. Абакан, ул. Тараса Шевченко, 62А</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>График</span>
-                                    <p>Пн–Сб · с 09:00 до 22:00</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>Направления</span>
-                                    <p>Бокс, кикбоксинг, ММА, ОФП, ММА, грепплинг, BJJ, персональные тренировки</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>Телефон</span>
-                                    <a href="tel:+79994508006">+7 (999) 450-80-06</a>
-                                </div>
-                            </div>
-
-                            <p class="branches-card__text">
-                                Просторный зал в центре города с современной зоной тренировок и ожидания,
-                                удобным расписанием и сильным тренерским составом для детей и взрослых.
-                            </p>
-
-                            <div class="branches-card__actions">
-                                <a href="#contact" class="btn btn-primary">Записаться</a>
-                                <a href="https://yandex.ru/maps?rtext=53.789306,91.335074~53.720368,91.460605&rtt=auto" target="_blank" class="btn btn-secondary">Построить маршрут</a>
-                            </div>
-                        </div>
-
-                        <div class="branches-card__image">
-                            <img src="site/img/abakan.jpg" alt="Филиал Bronx в Абакане">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Калинино -->
-                <div class="branches-pane" id="branch-kalinino">
-                    <div class="branches-card">
-                        <div class="branches-card__content">
-                            <span class="branches-card__label">Филиал БРОНКС</span>
-                            <h4>Калинино</h4>
-
-                            <div class="branches-card__info">
-                                <div class="branches-card__item">
-                                    <span>Адрес</span>
-                                    <p>с. Калинино, ул. 50 лет Победы, 16</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>График</span>
-                                    <p>Пн–Сб · с 09:00 до 22:00</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>Направления</span>
-                                    <p>Грепплинг, BJJ, персональные тренировки</p>
-                                </div>
-
-                                <div class="branches-card__item">
-                                    <span>Телефон</span>
-                                    <a href="tel:+79994508006">+7 (999) 450-80-06</a>
-                                </div>
-                            </div>
-
-                            <p class="branches-card__text">
-                                Уютный филиал для тех, кто хочет тренироваться рядом с домом,
-                                получать внимание тренера и заниматься в комфортной атмосфере.
-                            </p>
-
-                            <div class="branches-card__actions">
-                                <a href="#contact" class="btn btn-primary">Записаться</a>
-                                <a href="https://yandex.ru/maps?rtext=53.789407,91.335221~53.767480,91.384994&rtt=auto" target="_blank" class="btn btn-secondary">Построить маршрут</a>
-                            </div>
-                        </div>
-
-                        <div class="branches-card__image">
-                            <img src="site/img/abakan-br.JPG" alt="Филиал Bronx в Калинино">
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="branches-container">
+        <div class="general-title">
+          <h2>ФИЛИАЛЫ</h2>
+          <h3>ВЫБЕРИТЕ УДОБНЫЙ ЗАЛ ДЛЯ ТРЕНИРОВОК</h3>
         </div>
+
+        <div class="branches-tabs">
+          <button
+            class="branches-tabs__btn active"
+            type="button"
+            data-branch="abakan"
+          >
+            АБАКАН
+          </button>
+          <button
+            class="branches-tabs__btn"
+            type="button"
+            data-branch="kalinino"
+          >
+            КАЛИНИНО
+          </button>
+        </div>
+
+        <div class="branches-content">
+          <!-- Абакан -->
+          <div class="branches-pane active" id="branch-abakan">
+            <div class="branches-card">
+              <div class="branches-card__content">
+                <span class="branches-card__label">Филиал БРОНКС</span>
+                <h4>Абакан</h4>
+
+                <div class="branches-card__info">
+                  <div class="branches-card__item">
+                    <span>Адрес</span>
+                    <p>г. Абакан, ул. Тараса Шевченко, 62А</p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>График</span>
+                    <p>Пн–Сб · с 09:00 до 22:00</p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>Направления</span>
+                    <p>
+                      Бокс, кикбоксинг, ММА, ОФП, ММА, грепплинг, BJJ,
+                      персональные тренировки
+                    </p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>Телефон</span>
+                    <a href="tel:+79994508006">+7 (999) 450-80-06</a>
+                  </div>
+                </div>
+
+                <p class="branches-card__text">
+                  Просторный зал в центре города с современной зоной тренировок
+                  и ожидания, удобным расписанием и сильным тренерским составом
+                  для детей и взрослых.
+                </p>
+
+                <div class="branches-card__actions">
+                  <a href="#contact" class="btn btn-primary">Записаться</a>
+                  <a
+                    href="https://yandex.ru/maps?rtext=53.789306,91.335074~53.720368,91.460605&rtt=auto"
+                    target="_blank"
+                    class="btn btn-secondary"
+                    >Построить маршрут</a
+                  >
+                </div>
+              </div>
+
+              <div class="branches-card__image">
+                <img src="site/img/abakan.jpg" alt="Филиал Bronx в Абакане" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Калинино -->
+          <div class="branches-pane" id="branch-kalinino">
+            <div class="branches-card">
+              <div class="branches-card__content">
+                <span class="branches-card__label">Филиал БРОНКС</span>
+                <h4>Калинино</h4>
+
+                <div class="branches-card__info">
+                  <div class="branches-card__item">
+                    <span>Адрес</span>
+                    <p>с. Калинино, ул. 50 лет Победы, 16</p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>График</span>
+                    <p>Пн–Сб · с 09:00 до 22:00</p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>Направления</span>
+                    <p>Грепплинг, BJJ, персональные тренировки</p>
+                  </div>
+
+                  <div class="branches-card__item">
+                    <span>Телефон</span>
+                    <a href="tel:+79994508006">+7 (999) 450-80-06</a>
+                  </div>
+                </div>
+
+                <p class="branches-card__text">
+                  Уютный филиал для тех, кто хочет тренироваться рядом с домом,
+                  получать внимание тренера и заниматься в комфортной атмосфере.
+                </p>
+
+                <div class="branches-card__actions">
+                  <a href="#contact" class="btn btn-primary">Записаться</a>
+                  <a
+                    href="https://yandex.ru/maps?rtext=53.789407,91.335221~53.767480,91.384994&rtt=auto"
+                    target="_blank"
+                    class="btn btn-secondary"
+                    >Построить маршрут</a
+                  >
+                </div>
+              </div>
+
+              <div class="branches-card__image">
+                <img
+                  src="site/img/abakan-br.JPG"
+                  alt="Филиал Bronx в Калинино"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- reviews -->
 
     <section class="reviews" id="reviews">
-        <div class="reviews-container">
-            <div class="general-title">
-                <h2>ОТЗЫВЫ</h2>
-                <h3>НАМ ДОВЕРЯЮТ НА НЕЗАВИСИМЫХ ПЛОЩАДКАХ</h3>
-            </div>
-
-            <div class="reviews-platforms">
-                <a href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
-                    class="reviews-platform reviews-platform--yandex" target="_blank" rel="noopener noreferrer">
-                    <div class="reviews-platform__top">
-                        <span class="reviews-platform__badge">Яндекс Карты</span>
-                        <span class="reviews-platform__rating">4.8</span>
-                    </div>
-
-                    <div class="reviews-platform__info">
-                        <h4>Отзывы из Яндекс Карт</h4>
-                        <p>Смотрите реальные оценки, впечатления клиентов и мнение о клубе Bronx.</p>
-                    </div>
-
-                    <div class="reviews-platform__bottom">
-                        <span>23+ оценок</span>
-                        <span>Открыть площадку</span>
-                    </div>
-                </a>
-
-                <a href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
-                    class="reviews-platform reviews-platform--2gis" target="_blank" rel="noopener noreferrer">
-                    <div class="reviews-platform__top">
-                        <span class="reviews-platform__badge">2ГИС</span>
-                        <span class="reviews-platform__rating">5.0</span>
-                    </div>
-
-                    <div class="reviews-platform__info">
-                        <h4>Отзывы из 2ГИС</h4>
-                        <p>Независимые отзывы о тренировках, атмосфере клуба и работе тренеров.</p>
-                    </div>
-
-                    <div class="reviews-platform__bottom">
-                        <span>24+ оценок</span>
-                        <span>Открыть площадку</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="reviews-tabs">
-                <button class="reviews-tabs__btn active" type="button" data-review-tab="yandex">
-                    Яндекс Карты
-                </button>
-                <button class="reviews-tabs__btn" type="button" data-review-tab="gis">
-                    2ГИС
-                </button>
-            </div>
-
-            <div class="reviews-pane active" id="reviews-yandex">
-                <div class="reviews-slider swiper reviews-swiper-yandex">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Александр П.</strong>
-                                        <span>Яндекс Карты</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Отличный клуб, сильный тренерский состав и очень заряженная атмосфера.
-                                    Ребёнку нравится, ходит с удовольствием, прогресс виден уже через короткое время.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Февраль 2026</span>
-                                    <a href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Марина К.</strong>
-                                        <span>Яндекс Карты</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Очень нравится отношение к детям и дисциплина на тренировках.
-                                    Чистый зал, хорошее оборудование и приятная атмосфера внутри клуба.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Январь 2026</span>
-                                    <a href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Марина К.</strong>
-                                        <span>Яндекс Карты</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Очень нравится отношение к детям и дисциплина на тренировках.
-                                    Чистый зал, хорошее оборудование и приятная атмосфера внутри клуба.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Январь 2026</span>
-                                    <a href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Игорь С.</strong>
-                                        <span>Яндекс Карты</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Bronx — это не просто зал, а место, где реально мотивируют работать над собой.
-                                    Хорошая команда и грамотный подход к тренировочному процессу.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Декабрь 2025</span>
-                                    <a href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="reviews-slider__nav">
-                        <button class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-yandex"
-                            type="button" aria-label="Назад">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15 6L9 12L15 18" />
-                            </svg>
-                        </button>
-
-                        <button class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-yandex"
-                            type="button" aria-label="Вперёд">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M9 6L15 12L9 18" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="reviews-pane" id="reviews-gis">
-                <div class="reviews-slider swiper reviews-swiper-gis">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Екатерина Л.</strong>
-                                        <span>2ГИС</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Очень хороший клуб, доброжелательная атмосфера и сильные тренеры.
-                                    Видно, что здесь действительно вкладываются в результат каждого ученика.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Февраль 2026</span>
-                                    <a href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Дмитрий Р.</strong>
-                                        <span>2ГИС</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Отличное место для тренировок. Всё организовано на хорошем уровне:
-                                    зал, тренерский подход, дисциплина и отношение к новичкам.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Январь 2026</span>
-                                    <a href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Дмитрий Р.</strong>
-                                        <span>2ГИС</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Отличное место для тренировок. Всё организовано на хорошем уровне:
-                                    зал, тренерский подход, дисциплина и отношение к новичкам.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Январь 2026</span>
-                                    <a href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <article class="review-card">
-                                <div class="review-card__top">
-                                    <div class="review-card__author">
-                                        <strong>Ольга Н.</strong>
-                                        <span>2ГИС</span>
-                                    </div>
-                                    <div class="review-card__stars">★★★★★</div>
-                                </div>
-
-                                <p class="review-card__text">
-                                    Ребёнок ходит на занятия с большим удовольствием.
-                                    Очень нравится атмосфера, внимательность тренеров и общий уровень клуба.
-                                </p>
-
-                                <div class="review-card__bottom">
-                                    <span>Декабрь 2025</span>
-                                    <a href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
-                                        target="_blank" rel="noopener noreferrer">Открыть</a>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="reviews-slider__nav">
-                        <button class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-gis"
-                            type="button" aria-label="Назад">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15 6L9 12L15 18" />
-                            </svg>
-                        </button>
-
-                        <button class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-gis"
-                            type="button" aria-label="Вперёд">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M9 6L15 12L9 18" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div class="reviews-container">
+        <div class="general-title">
+          <h2>ОТЗЫВЫ</h2>
+          <h3>НАМ ДОВЕРЯЮТ НА НЕЗАВИСИМЫХ ПЛОЩАДКАХ</h3>
         </div>
+
+        <div class="reviews-platforms">
+          <a
+            href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
+            class="reviews-platform reviews-platform--yandex"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="reviews-platform__top">
+              <span class="reviews-platform__badge">Яндекс Карты</span>
+              <span class="reviews-platform__rating">4.8</span>
+            </div>
+
+            <div class="reviews-platform__info">
+              <h4>Отзывы из Яндекс Карт</h4>
+              <p>
+                Смотрите реальные оценки, впечатления клиентов и мнение о клубе
+                Bronx.
+              </p>
+            </div>
+
+            <div class="reviews-platform__bottom">
+              <span>23+ оценок</span>
+              <span>Открыть площадку</span>
+            </div>
+          </a>
+
+          <a
+            href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
+            class="reviews-platform reviews-platform--2gis"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="reviews-platform__top">
+              <span class="reviews-platform__badge">2ГИС</span>
+              <span class="reviews-platform__rating">5.0</span>
+            </div>
+
+            <div class="reviews-platform__info">
+              <h4>Отзывы из 2ГИС</h4>
+              <p>
+                Независимые отзывы о тренировках, атмосфере клуба и работе
+                тренеров.
+              </p>
+            </div>
+
+            <div class="reviews-platform__bottom">
+              <span>24+ оценок</span>
+              <span>Открыть площадку</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="reviews-tabs">
+          <button
+            class="reviews-tabs__btn active"
+            type="button"
+            data-review-tab="yandex"
+          >
+            Яндекс Карты
+          </button>
+          <button class="reviews-tabs__btn" type="button" data-review-tab="gis">
+            2ГИС
+          </button>
+        </div>
+
+        <div class="reviews-pane active" id="reviews-yandex">
+          <div class="reviews-slider swiper reviews-swiper-yandex">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Александр П.</strong>
+                      <span>Яндекс Карты</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Отличный клуб, сильный тренерский состав и очень заряженная
+                    атмосфера. Ребёнку нравится, ходит с удовольствием, прогресс
+                    виден уже через короткое время.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Февраль 2026</span>
+                    <a
+                      href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Марина К.</strong>
+                      <span>Яндекс Карты</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Очень нравится отношение к детям и дисциплина на
+                    тренировках. Чистый зал, хорошее оборудование и приятная
+                    атмосфера внутри клуба.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Январь 2026</span>
+                    <a
+                      href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Марина К.</strong>
+                      <span>Яндекс Карты</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Очень нравится отношение к детям и дисциплина на
+                    тренировках. Чистый зал, хорошее оборудование и приятная
+                    атмосфера внутри клуба.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Январь 2026</span>
+                    <a
+                      href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Игорь С.</strong>
+                      <span>Яндекс Карты</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Bronx — это не просто зал, а место, где реально мотивируют
+                    работать над собой. Хорошая команда и грамотный подход к
+                    тренировочному процессу.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Декабрь 2025</span>
+                    <a
+                      href="https://yandex.com/maps/org/bronx/80831520637/?ll=91.452335%2C53.743922&mode=search&sll=4.892559%2C52.373059&sspn=1.399384%2C0.761519&text=%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%B0%D0%B1%D0%B0%D0%BA%D0%B0%D0%BD&z=13"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="reviews-slider__nav">
+              <button
+                class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-yandex"
+                type="button"
+                aria-label="Назад"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M15 6L9 12L15 18" />
+                </svg>
+              </button>
+
+              <button
+                class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-yandex"
+                type="button"
+                aria-label="Вперёд"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 6L15 12L9 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-pane" id="reviews-gis">
+          <div class="reviews-slider swiper reviews-swiper-gis">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Екатерина Л.</strong>
+                      <span>2ГИС</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Очень хороший клуб, доброжелательная атмосфера и сильные
+                    тренеры. Видно, что здесь действительно вкладываются в
+                    результат каждого ученика.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Февраль 2026</span>
+                    <a
+                      href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Дмитрий Р.</strong>
+                      <span>2ГИС</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Отличное место для тренировок. Всё организовано на хорошем
+                    уровне: зал, тренерский подход, дисциплина и отношение к
+                    новичкам.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Январь 2026</span>
+                    <a
+                      href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Дмитрий Р.</strong>
+                      <span>2ГИС</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Отличное место для тренировок. Всё организовано на хорошем
+                    уровне: зал, тренерский подход, дисциплина и отношение к
+                    новичкам.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Январь 2026</span>
+                    <a
+                      href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+
+              <div class="swiper-slide">
+                <article class="review-card">
+                  <div class="review-card__top">
+                    <div class="review-card__author">
+                      <strong>Ольга Н.</strong>
+                      <span>2ГИС</span>
+                    </div>
+                    <div class="review-card__stars">★★★★★</div>
+                  </div>
+
+                  <p class="review-card__text">
+                    Ребёнок ходит на занятия с большим удовольствием. Очень
+                    нравится атмосфера, внимательность тренеров и общий уровень
+                    клуба.
+                  </p>
+
+                  <div class="review-card__bottom">
+                    <span>Декабрь 2025</span>
+                    <a
+                      href="https://2gis.ru/abakan/search/%D0%B1%D1%80%D0%BE%D0%BD%D0%BA%D1%81%20%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE/firm/70000001078922321/91.377953%2C53.76708?m=91.377953%2C53.76708%2F17.8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Открыть</a
+                    >
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="reviews-slider__nav">
+              <button
+                class="reviews-slider__btn reviews-slider__btn--prev reviews-slider__btn--prev-gis"
+                type="button"
+                aria-label="Назад"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M15 6L9 12L15 18" />
+                </svg>
+              </button>
+
+              <button
+                class="reviews-slider__btn reviews-slider__btn--next reviews-slider__btn--next-gis"
+                type="button"
+                aria-label="Вперёд"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 6L15 12L9 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- form -->
 
     <section class="signup" id="signup">
-        <div class="signup-container">
-            <div class="general-title">
-                <h2>ЗАПИСЬ НА ТРЕНИРОВКУ</h2>
-                <h3>ОСТАВЬТЕ ЗАЯВКУ И МЫ СВЯЖЕМСЯ С ВАМИ</h3>
-            </div>
-
-            <div class="signup-card">
-                <div class="signup-card__info">
-                    <span class="signup-card__badge">Бронкс</span>
-
-                    <h4>ПЕРВАЯ ЗАЯВКА — ПЕРВЫЙ ШАГ К СИЛЬНОЙ ФОРМЕ</h4>
-
-                    <p class="signup-card__text">
-                        Заполните форму, выберите формат тренировки и, если нужен индивидуальный
-                        формат, укажите тренера. Мы свяжемся с вами, уточним детали и подберём
-                        удобное время для занятий.
-                    </p>
-
-                    <div class="signup-card__points">
-                        <div class="signup-card__point">
-                            <span>01</span>
-                            <p>Быстрая обратная связь после заявки</p>
-                        </div>
-
-                        <div class="signup-card__point">
-                            <span>02</span>
-                            <p>Групповые и индивидуальные тренировки</p>
-                        </div>
-
-                        <div class="signup-card__point">
-                            <span>03</span>
-                            <p>Возможность выбрать тренера под индивидуальный формат</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="signup-card__form-wrap">
-                    <form class="signup-form" id="signupForm">
-                        <div class="signup-form__group">
-                            <label for="signupName">Ваше имя</label>
-                            <input id="signupName" name="name" type="text" class="signup-form__input"
-                                placeholder="Введите ваше имя" required>
-                        </div>
-
-                        <div class="signup-form__group">
-                            <label for="signupPhone">Телефон</label>
-                            <input id="signupPhone" name="phone" type="tel" class="signup-form__input"
-                                placeholder="+7 (___) ___-__-__" inputmode="tel" required>
-                        </div>
-
-                        <div class="signup-form__group">
-                            <label for="trainingType">Тип тренировки</label>
-                            <select id="trainingType" name="training_type"
-                                class="signup-form__input signup-form__select" required>
-                                <option value="" selected disabled>Выберите формат</option>
-                                <option value="Групповая">Групповая</option>
-                                <option value="Индивидуальная">Индивидуальная</option>
-                            </select>
-                        </div>
-
-                        <div class="signup-form__group signup-form__group--trainer" id="trainerGroup">
-                            <label for="trainerSelect">Выберите тренера</label>
-                            <select id="trainerSelect" name="trainer" class="signup-form__input signup-form__select"
-                                disabled>
-                                <option value="" selected disabled>Выберите тренера</option>
-                                <option value="Данила Иванов">Данила Иванов</option>
-                                <option value="Михаил Болганов">Наталья Панкова</option>
-                                <option value="Михаил Болганов">Николай Чумаков</option>
-                                <option value="Анна Логачева">Анна Логачева</option>
-                                <option value="Анна Логачева">Каюмов Александр</option>
-                                <option value="Анна Логачева">Ардамин Вячеслав</option>
-                                <option value="Михаил Болганов">Коржавин Денис</option>
-                                <option value="Анна Логачева">Лесников Никита</option>
-                            </select>
-                        </div>
-
-                        <div class="signup-form__group">
-                            <label for="signupMessage">Комментарий</label>
-                            <textarea id="signupMessage" name="message" class="signup-form__textarea"
-                                placeholder="Например: интересует вечерняя группа / удобное время / возраст ребёнка"
-                                rows="5"></textarea>
-                        </div>
-
-                        <button class="btn btn-primary signup-form__btn" type="submit" id="signupSubmitBtn">
-                            <span class="btn-text">Записаться на тренировку</span>
-                        </button>
-
-                        <p class="signup-form__status signup-form__status--success" id="signupSuccessMessage">
-                            Спасибо! Заявка отправлена, мы скоро свяжемся с вами.
-                        </p>
-
-                        <p class="signup-form__status signup-form__status--error" id="signupErrorMessage">
-                            Не удалось отправить заявку. Попробуйте ещё раз чуть позже.
-                        </p>
-                    </form>
-                </div>
-            </div>
+      <div class="signup-container">
+        <div class="general-title">
+          <h2>ЗАПИСЬ НА ТРЕНИРОВКУ</h2>
+          <h3>ОСТАВЬТЕ ЗАЯВКУ И МЫ СВЯЖЕМСЯ С ВАМИ</h3>
         </div>
+
+        <div class="signup-card">
+          <div class="signup-card__info">
+            <span class="signup-card__badge">Бронкс</span>
+
+            <h4>ПЕРВАЯ ЗАЯВКА — ПЕРВЫЙ ШАГ К СИЛЬНОЙ ФОРМЕ</h4>
+
+            <p class="signup-card__text">
+              Заполните форму, выберите формат тренировки и, если нужен
+              индивидуальный формат, укажите тренера. Мы свяжемся с вами,
+              уточним детали и подберём удобное время для занятий.
+            </p>
+
+            <div class="signup-card__points">
+              <div class="signup-card__point">
+                <span>01</span>
+                <p>Быстрая обратная связь после заявки</p>
+              </div>
+
+              <div class="signup-card__point">
+                <span>02</span>
+                <p>Групповые и индивидуальные тренировки</p>
+              </div>
+
+              <div class="signup-card__point">
+                <span>03</span>
+                <p>Возможность выбрать тренера под индивидуальный формат</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="signup-card__form-wrap">
+            <form class="signup-form" id="signupForm">
+              <div class="signup-form__group">
+                <label for="signupName">Ваше имя</label>
+                <input
+                  id="signupName"
+                  name="name"
+                  type="text"
+                  class="signup-form__input"
+                  placeholder="Введите ваше имя"
+                  required
+                />
+              </div>
+
+              <div class="signup-form__group">
+                <label for="signupPhone">Телефон</label>
+                <input
+                  id="signupPhone"
+                  name="phone"
+                  type="tel"
+                  class="signup-form__input"
+                  placeholder="+7 (___) ___-__-__"
+                  inputmode="tel"
+                  required
+                />
+              </div>
+
+              <div class="signup-form__group">
+                <label for="trainingType">Тип тренировки</label>
+                <select
+                  id="trainingType"
+                  name="training_type"
+                  class="signup-form__input signup-form__select"
+                  required
+                >
+                  <option value="" selected disabled>Выберите формат</option>
+                  <option value="Групповая">Групповая</option>
+                  <option value="Индивидуальная">Индивидуальная</option>
+                </select>
+              </div>
+
+              <div
+                class="signup-form__group signup-form__group--trainer"
+                id="trainerGroup"
+              >
+                <label for="trainerSelect">Выберите тренера</label>
+                <select
+                  id="trainerSelect"
+                  name="trainer"
+                  class="signup-form__input signup-form__select"
+                  disabled
+                >
+                  <option value="" selected disabled>Выберите тренера</option>
+<option value="Данила Иванов">Данила Иванов</option>
+<option value="Наталья Панкова">Наталья Панкова</option>
+<option value="Николай Чумаков">Николай Чумаков</option>
+<option value="Анна Логачева">Анна Логачева</option>
+<option value="Каюмов Александр">Каюмов Александр</option>
+<option value="Ардамин Вячеслав">Ардамин Вячеслав</option>
+<option value="Коржавин Денис">Коржавин Денис</option>
+<option value="Лесников Никита">Лесников Никита</option>
+                </select>
+              </div>
+
+              <div class="signup-form__group">
+                <label for="signupMessage">Комментарий</label>
+                <textarea
+                  id="signupMessage"
+                  name="message"
+                  class="signup-form__textarea"
+                  placeholder="Например: интересует вечерняя группа / удобное время / возраст ребёнка"
+                  rows="5"
+                ></textarea>
+              </div>
+
+              <button
+                class="btn btn-primary signup-form__btn"
+                type="submit"
+                id="signupSubmitBtn"
+              >
+                <span class="btn-text">Записаться на тренировку</span>
+              </button>
+
+              <p class="signup-form__policy">
+                Отправляя заявку, вы соглашаетесь с
+                <a href="/privacy-policy" target="_blank">
+                  политикой конфиденциальности
+                </a>
+                и даёте согласие на обработку персональных данных.
+              </p>
+              <p
+                class="signup-form__status signup-form__status--success"
+                id="signupSuccessMessage"
+              >
+                Спасибо! Заявка отправлена, мы скоро свяжемся с вами.
+              </p>
+
+              <p
+                class="signup-form__status signup-form__status--error"
+                id="signupErrorMessage"
+              >
+                Не удалось отправить заявку. Попробуйте ещё раз чуть позже.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- футер -->
 
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer__left">
-                <a href="#home" class="footer__logo">
-                    <img src="site/img/Logo.png" alt="Logo">
-                </a>
+      <div class="footer-container">
+        <div class="footer__left">
+          <a href="#home" class="footer__logo">
+            <img src="site/img/Logo.png" alt="Logo" />
+          </a>
 
-                <p class="footer__text">
-                    Стань сильнее. Индивидуальные и групповые тренировки по боксу, кикбоксингу, ММА, BJJ, грепплингу в
-                    Абакане.
-                </p>
+          <p class="footer__text">
+            Стань сильнее. Индивидуальные и групповые тренировки по боксу,
+            кикбоксингу, ММА, BJJ, грепплингу в Абакане.
+          </p>
 
-                <div class="footer__socials">
-                    <a href="#" target="_blank" aria-label="MAX">
-                        <img src="site/img/MAX.svg" alt="max ikon">
-                    </a>
-                    <a href="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
-                        target="_blank" aria-label="vk">
-                        <img src="site/img/vk.png" alt="vk ikon">
-                    </a>
-                    <a href="https://t.me/AutoZavoz" target="_blank" aria-label="tg">
-                        <img src="site/img/tg.png" alt="tg ikon">
-                    </a>
-                </div>
-            </div>
-
-            <div class="footer__nav">
-                <h3>КЛУБ</h3>
-                <ul>
-                    <li><a href="#advantages">НАПРАВЛЕНИЯ</a></li>
-                    <li><a href="#coach">ТРЕНЕРЫ</a></li>
-                    <li><a href="#work">О КЛУБЕ</a></li>
-                    <li><a href="#reviews">ОТЗЫВЫ</a></li>
-                    <li><a href="#branches">ФИЛИАЛЫ</a></li>
-                    <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
-                    <li><a href="#signup">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
-                </ul>
-            </div>
-
-            <div class="footer__contacts">
-                <h3>КОНТАКТЫ</h3>
-
-                <div class="footer__contact-item">
-                    <span>ТЕЛЕФОН</span>
-                    <a href="tel:+79339943070">+7 (999) 450-80-06</a>
-                </div>
-
-                <div class="footer__contact-item">
-                    <span>EMAIL</span>
-                    <a href="mailto:"></a>
-                </div>
-
-                <div class="footer__contact-item">
-                    <span>АДРЕС</span>
-                    <p>г. Абакан, ул. Тараса Шевченко, 62А</p>
-                    <p>с. Калинино, ул. 50 лет Победы, 16</p>
-                </div>
-            </div>
+          <div class="footer__socials">
+            <a href="#" target="_blank" aria-label="MAX">
+              <img src="site/img/MAX.svg" alt="max ikon" />
+            </a>
+            <a
+              href="https://vk.com/bronx_sk_ab?from=groups&trackcode=89483f3cq3Iw9RFWUKgr6WFilSif_6sqM0M923L-QWse9xBHhMZvGZUex0E32yflSnGcJJ3OsicjchTGYPUXbRWYYMhfM7xz-g"
+              target="_blank"
+              aria-label="vk"
+            >
+              <img src="site/img/vk.png" alt="vk ikon" />
+            </a>
+            <a href="https://t.me/AutoZavoz" target="_blank" aria-label="tg">
+              <img src="site/img/tg.png" alt="tg ikon" />
+            </a>
+          </div>
         </div>
+
+        <div class="footer__nav">
+          <h3>КЛУБ</h3>
+          <ul>
+            <li><a href="#advantages">НАПРАВЛЕНИЯ</a></li>
+            <li><a href="#coach">ТРЕНЕРЫ</a></li>
+            <li><a href="#work">О КЛУБЕ</a></li>
+            <li><a href="#reviews">ОТЗЫВЫ</a></li>
+            <li><a href="#branches">ФИЛИАЛЫ</a></li>
+            <li><a href="#signup">ЗАПИСАТЬСЯ</a></li>
+            <li><a href="#signup">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__contacts">
+          <h3>КОНТАКТЫ</h3>
+
+          <div class="footer__contact-item">
+            <span>ТЕЛЕФОН</span>
+            <a href="tel:+79339943070">+7 (999) 450-80-06</a>
+          </div>
+
+          <div class="footer__contact-item">
+            <span>EMAIL</span>
+            <a href="mailto:"></a>
+          </div>
+
+          <div class="footer__contact-item">
+            <span>АДРЕС</span>
+            <p>г. Абакан, ул. Тараса Шевченко, 62А</p>
+            <p>с. Калинино, ул. 50 лет Победы, 16</p>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="site/scripts/main.js"></script>
-</body>
-
+  </body>
 </html>

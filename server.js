@@ -3,73 +3,100 @@ require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const path = require('path');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
+const MIN_FORM_TIME_MS = 2000;
 
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
+
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false
+    })
+);
 
 app.use(cors());
-app.use(express.json({ limit: '200kb' }));
-app.use(express.urlencoded({ extended: true, limit: '200kb' }));
-
+app.use(express.json({ limit: '50kb' }));
+app.use(express.urlencoded({ extended: true, limit: '50kb' }));
 app.use(express.static(path.join(__dirname)));
 
 const requiredEnv = [
     'SMTP_HOST',
     'SMTP_PORT',
-    'SMTP_SECURE',
     'SMTP_USER',
     'SMTP_PASS',
-    'MAIL_TO'
+    'TO_EMAIL'
 ];
 
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
 
 if (missingEnv.length) {
-    console.error(
-        `Отсутствуют переменные окружения: ${missingEnv.join(', ')}`
-    );
+    console.error(`Отсутствуют переменные окружения: ${missingEnv.join(', ')}`);
     process.exit(1);
 }
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === 'true',
+    secure: Number(process.env.SMTP_PORT) === 465,
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
     }
 });
 
-app.post('/api/send', async (req, res) => {
+const sendLimiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        success: false,
+        message: 'Слишком много заявок. Попробуйте чуть позже.'
+    }
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Bronx server is running'
+    });
+});
+
+app.post('/api/send', sendLimiter, async (req, res) => {
     try {
-        const {
-            name = '',
-            phone = '',
-            training_type = '',
-            trainer = '',
-            message = ''
-        } = req.body || {};
-
-        const trimmedName = String(name).trim();
-        const trimmedPhone = String(phone).trim();
-        const trimmedTrainingType = String(training_type).trim();
-        const trimmedTrainer = String(trainer).trim();
-        const trimmedMessage = String(message).trim();
-
-        const phoneDigits = trimmedPhone.replace(/\D/g, '');
-
-        if (!trimmedName || !trimmedPhone) {
+        if (!req.body || typeof req.body !== 'object') {
             return res.status(400).json({
                 success: false,
-                message: 'Заполните обязательные поля.'
+                message: 'Некорректный запрос.'
             });
         }
 
-        if (trimmedName.length < 2 || trimmedName.length > 80) {
+        const formTime = Number(req.body.form_time || 0);
+
+        if (!formTime || Date.now() - formTime < MIN_FORM_TIME_MS) {
+            return res.status(400).json({
+                success: false,
+                message: 'Попробуйте отправить форму чуть позже.'
+            });
+        }
+
+        const name = cleanText(req.body.name, 80);
+        const phone = cleanText(req.body.phone, 40);
+        const trainingType = cleanText(req.body.training_type, 40);
+        const trainer = cleanText(req.body.trainer, 80);
+        const message = cleanText(req.body.message, 900);
+        const page = cleanText(req.body.page, 200);
+
+        const phoneDigits = phone.replace(/\D/g, '');
+
+        if (!name || name.length < 2 || name.length > 80) {
             return res.status(400).json({
                 success: false,
                 message: 'Введите корректное имя.'
@@ -83,192 +110,62 @@ app.post('/api/send', async (req, res) => {
             });
         }
 
-        if (!trimmedTrainingType) {
+        if (!trainingType) {
             return res.status(400).json({
                 success: false,
                 message: 'Выберите тип тренировки.'
             });
         }
 
-        if (
-            trimmedTrainingType !== 'Групповая' &&
-            trimmedTrainingType !== 'Индивидуальная'
-        ) {
+        if (!['Групповая', 'Индивидуальная'].includes(trainingType)) {
             return res.status(400).json({
                 success: false,
                 message: 'Некорректный тип тренировки.'
             });
         }
 
-        if (trimmedTrainingType === 'Индивидуальная' && !trimmedTrainer) {
+        if (trainingType === 'Индивидуальная' && !trainer) {
             return res.status(400).json({
                 success: false,
                 message: 'Для индивидуальной тренировки нужно выбрать тренера.'
             });
         }
 
-        const html = `
-            <div style="margin:0; padding:0; background:#050505; font-family:Arial, Helvetica, sans-serif; color:#ffffff;">
-                <div style="max-width:680px; margin:0 auto; background:#0a0a0a; border:1px solid rgba(255,196,0,0.18);">
-                    <div style="
-                        padding:32px 28px;
-                        background:
-                            linear-gradient(180deg, rgba(255,204,0,0.14) 0%, rgba(255,143,0,0.06) 100%),
-                            #090909;
-                        border-bottom:1px solid rgba(255,196,0,0.18);
-                        text-align:center;
-                    ">
-                        <div style="
-                            display:inline-block;
-                            padding:8px 14px;
-                            border-radius:999px;
-                            border:1px solid rgba(255,196,0,0.28);
-                            background:rgba(255,255,255,0.03);
-                            color:#f5f5f5;
-                            font-size:12px;
-                            font-weight:700;
-                            letter-spacing:1.6px;
-                            text-transform:uppercase;
-                            margin-bottom:16px;
-                        ">
-                            Bronx Fight Club
-                        </div>
+        const formattedPhone = formatPhone(phoneDigits);
+        const telLink = makeTelLink(phoneDigits);
 
-                        <h1 style="
-                            margin:0;
-                            font-size:30px;
-                            line-height:1.1;
-                            font-weight:800;
-                            color:#ffffff;
-                            letter-spacing:1px;
-                            text-transform:uppercase;
-                        ">
-                            Новая заявка
-                        </h1>
+        const createdAt = new Date().toLocaleString('ru-RU', {
+            timeZone: 'Asia/Krasnoyarsk'
+        });
 
-                        <p style="
-                            margin:14px 0 0;
-                            font-size:15px;
-                            line-height:1.6;
-                            color:#d6d6d6;
-                        ">
-                            С сайта поступила новая заявка на тренировку
-                        </p>
-                    </div>
+        const text = `
+Новая заявка с сайта Bronx
 
-                    <div style="padding:28px;">
-                        <div style="
-                            margin-bottom:18px;
-                            padding:18px 20px;
-                            background:#111111;
-                            border:1px solid rgba(255,196,0,0.14);
-                            border-radius:18px;
-                        ">
-                            <div style="font-size:12px; color:#ffcc00; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px;">
-                                Имя
-                            </div>
-                            <div style="font-size:18px; line-height:1.5; color:#ffffff; font-weight:700;">
-                                ${escapeHtml(trimmedName)}
-                            </div>
-                        </div>
+Имя: ${name}
+Телефон: ${formattedPhone}
+Тип тренировки: ${trainingType}
+Тренер: ${trainer || 'Не выбран'}
+Комментарий: ${message || '—'}
+Страница: ${page || '—'}
+Дата заявки: ${createdAt}
+        `.trim();
 
-                        <div style="
-                            margin-bottom:18px;
-                            padding:18px 20px;
-                            background:#111111;
-                            border:1px solid rgba(255,196,0,0.14);
-                            border-radius:18px;
-                        ">
-                            <div style="font-size:12px; color:#ffcc00; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px;">
-                                Телефон
-                            </div>
-                            <div style="font-size:18px; line-height:1.5; color:#ffffff; font-weight:700;">
-                                ${escapeHtml(trimmedPhone)}
-                            </div>
-                        </div>
-
-                        <div style="
-                            margin-bottom:18px;
-                            padding:18px 20px;
-                            background:#111111;
-                            border:1px solid rgba(255,196,0,0.14);
-                            border-radius:18px;
-                        ">
-                            <div style="font-size:12px; color:#ffcc00; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px;">
-                                Тип тренировки
-                            </div>
-                            <div style="font-size:17px; line-height:1.5; color:#ffffff; font-weight:700;">
-                                ${escapeHtml(trimmedTrainingType)}
-                            </div>
-                        </div>
-
-                        <div style="
-                            margin-bottom:18px;
-                            padding:18px 20px;
-                            background:#111111;
-                            border:1px solid rgba(255,196,0,0.14);
-                            border-radius:18px;
-                        ">
-                            <div style="font-size:12px; color:#ffcc00; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px;">
-                                Тренер
-                            </div>
-                            <div style="font-size:17px; line-height:1.5; color:#ffffff; font-weight:700;">
-                                ${escapeHtml(trimmedTrainer || 'Не выбран')}
-                            </div>
-                        </div>
-
-                        <div style="
-                            padding:18px 20px;
-                            background:#111111;
-                            border:1px solid rgba(255,196,0,0.14);
-                            border-radius:18px;
-                        ">
-                            <div style="font-size:12px; color:#ffcc00; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:8px;">
-                                Комментарий
-                            </div>
-                            <div style="font-size:16px; line-height:1.7; color:#dcdcdc;">
-                                ${escapeHtml(trimmedMessage || 'Пользователь не оставил комментарий')}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="
-                        padding:22px 28px 30px;
-                        border-top:1px solid rgba(255,196,0,0.12);
-                        background:#080808;
-                        text-align:center;
-                    ">
-                        <div style="
-                            display:inline-block;
-                            padding:12px 22px;
-                            border-radius:999px;
-                            background:linear-gradient(180deg, #ffcc00 0%, #ffb300 40%, #ff8f00 100%);
-                            color:#111111;
-                            font-size:13px;
-                            font-weight:800;
-                            text-transform:uppercase;
-                            letter-spacing:1px;
-                        ">
-                            Bronx • Новая заявка
-                        </div>
-
-                        <p style="
-                            margin:16px 0 0;
-                            font-size:13px;
-                            line-height:1.6;
-                            color:#8e8e8e;
-                        ">
-                            Письмо отправлено автоматически с формы записи на сайте Bronx.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        `;
+        const html = buildEmailTemplate({
+            name,
+            formattedPhone,
+            telLink,
+            trainingType,
+            trainer: trainer || 'Не выбран',
+            message: message || '—',
+            page: page || '—',
+            createdAt
+        });
 
         await transporter.sendMail({
             from: `"Bronx сайт" <${process.env.SMTP_USER}>`,
-            to: process.env.MAIL_TO,
-            subject: 'Новая заявка с сайта Bronx',
+            to: process.env.TO_EMAIL,
+            subject: `Заявка Bronx: ${trainingType}`,
+            text,
             html
         });
 
@@ -277,7 +174,7 @@ app.post('/api/send', async (req, res) => {
             message: 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.'
         });
     } catch (error) {
-        console.error('Ошибка сервера при отправке письма:', error);
+        console.error('Ошибка отправки заявки:', error);
 
         return res.status(500).json({
             success: false,
@@ -299,8 +196,16 @@ transporter.verify((error) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server started: http://localhost:${PORT}`);
+    console.log(`Bronx server started: http://localhost:${PORT}`);
 });
+
+function cleanText(value, maxLength = 500) {
+    return String(value || '')
+        .replace(/[<>]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, maxLength);
+}
 
 function escapeHtml(value) {
     return String(value || '')
@@ -309,4 +214,168 @@ function escapeHtml(value) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+}
+
+function formatPhone(phoneDigits) {
+    return `+7 (${phoneDigits.slice(1, 4)}) ${phoneDigits.slice(4, 7)}-${phoneDigits.slice(7, 9)}-${phoneDigits.slice(9, 11)}`;
+}
+
+function makeTelLink(phoneDigits) {
+    return `+7${phoneDigits.slice(1)}`;
+}
+
+function emailRow(label, value) {
+    return `
+<tr>
+<td style="padding:12px 0 4px; color:#777777; font-size:12px; text-transform:uppercase; letter-spacing:1px;">
+${escapeHtml(label)}
+</td>
+</tr>
+<tr>
+<td style="padding:4px 0 16px; font-size:18px; font-weight:700; color:#ffffff; line-height:1.5;">
+${value}
+</td>
+</tr>
+`;
+}
+
+function buildEmailTemplate({
+    name,
+    formattedPhone,
+    telLink,
+    trainingType,
+    trainer,
+    message,
+    page,
+    createdAt
+}) {
+    return `
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Новая заявка Bronx</title>
+</head>
+
+<body style="margin:0; padding:0; background:#070707; font-family:Arial, sans-serif; color:#ffffff;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#070707; padding:32px 12px;">
+<tr>
+<td align="center">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="
+  max-width:640px;
+  background:#111111;
+  border:1px solid rgba(255,204,0,0.18);
+  border-radius:20px;
+  overflow:hidden;
+">
+
+<tr>
+<td style="
+  padding:32px;
+  background:linear-gradient(135deg,#171717 0%,#090909 100%);
+  border-bottom:3px solid #ffcc00;
+">
+
+<div style="
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#ffcc00;
+  margin-bottom:10px;
+">
+BRONX / ЗАЯВКА
+</div>
+
+<h1 style="
+  margin:0;
+  font-size:28px;
+  line-height:1.2;
+  text-transform:uppercase;
+">
+Новая заявка<br>
+<span style="color:#ffcc00;">на тренировку</span>
+</h1>
+
+<p style="
+  margin:14px 0 0;
+  color:#a0a0a0;
+  font-size:14px;
+  line-height:1.6;
+">
+Клиент оставил заявку с формы записи на сайте Bronx.
+</p>
+
+</td>
+</tr>
+
+<tr>
+<td style="padding:28px 32px;">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+
+${emailRow('Имя', escapeHtml(name))}
+
+${emailRow(
+    'Телефон',
+    `<a href="tel:${escapeHtml(telLink)}" style="color:#ffcc00; text-decoration:none;">${escapeHtml(formattedPhone)}</a>`
+)}
+
+${emailRow('Тип тренировки', escapeHtml(trainingType))}
+
+${emailRow('Тренер', escapeHtml(trainer))}
+
+${emailRow('Комментарий', escapeHtml(message))}
+
+${emailRow('Страница', escapeHtml(page))}
+
+${emailRow('Дата заявки', escapeHtml(createdAt))}
+
+</table>
+
+</td>
+</tr>
+
+<tr>
+<td style="
+  padding:24px 32px;
+  background:#0b0b0b;
+  border-top:1px solid rgba(255,255,255,0.06);
+">
+
+<a href="tel:${escapeHtml(telLink)}" style="
+  display:inline-block;
+  padding:14px 22px;
+  background:linear-gradient(180deg,#ffcc00 0%,#ffb300 40%,#ff8f00 100%);
+  color:#000000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:700;
+  text-transform:uppercase;
+">
+Позвонить клиенту
+</a>
+
+<p style="
+  margin:16px 0 0;
+  color:#666666;
+  font-size:12px;
+  line-height:1.5;
+">
+Письмо автоматически отправлено с сайта Bronx Fight Club.
+</p>
+
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+`;
 }
