@@ -11,6 +11,11 @@ const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const MIN_FORM_TIME_MS = 2000;
 
+const allowedOrigins = [
+  'https://bronx-abakan.ru',
+  'https://www.bronx-abakan.ru'
+];
+
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
@@ -21,7 +26,19 @@ app.use(
     })
 );
 
-app.use(cors());
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('CORS blocked'));
+  },
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json({ limit: '50kb' }));
 app.use(express.urlencoded({ extended: true, limit: '50kb' }));
 app.use(express.static(path.join(__dirname)));
@@ -53,7 +70,7 @@ const transporter = nodemailer.createTransport({
 
 const sendLimiter = rateLimit({
     windowMs: 10 * 60 * 1000,
-    max: 5,
+    max: 3,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -69,7 +86,25 @@ app.get('/health', (req, res) => {
     });
 });
 
-app.post('/api/send', sendLimiter, async (req, res) => {
+
+
+function checkOrigin(req, res, next) {
+  const origin = req.headers.origin;
+
+  // если запрос не из браузера (например curl) — пропускаем
+  if (!origin) return next();
+
+  if (allowedOrigins.includes(origin)) {
+    return next();
+  }
+
+  return res.status(403).json({
+    success: false,
+    message: 'Access denied'
+  });
+}
+
+app.post('/api/send', checkOrigin, sendLimiter, async (req, res) => {
     try {
         if (!req.body || typeof req.body !== 'object') {
             return res.status(400).json({
