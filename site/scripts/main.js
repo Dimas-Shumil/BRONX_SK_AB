@@ -1,46 +1,87 @@
-const burger = document.querySelector('.header__burger');
-const mobileMenu = document.querySelector('.mobile-menu');
-const overlay = document.querySelector('.mobile-menu-overlay');
-const mobileLinks = document.querySelectorAll('.mobile-menu a');
-const header = document.querySelector('.header');
+'use strict';
 
-if (burger && mobileMenu && overlay) {
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
+    initHeaderScroll();
+    initSmoothScroll();
+    initCoachSlider();
+    initCoachModal();
+    initBranchesTabs();
+    initReviewsTabs();
+    initReviewsSliders();
+    initSignupForm();
+});
+
+/* =========================
+   Mobile menu
+========================= */
+
+function initMobileMenu() {
+    const burger = document.querySelector('.header__burger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+    if (!burger || !mobileMenu || !overlay) return;
+
+    const closeMenu = () => {
+        burger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        burger.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        burger.classList.add('active');
+        mobileMenu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('menu-open');
+        burger.setAttribute('aria-expanded', 'true');
+    };
+
+    burger.setAttribute('aria-expanded', 'false');
+
     burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        const isOpen = mobileMenu.classList.contains('active');
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 
     overlay.addEventListener('click', closeMenu);
 
-    mobileLinks.forEach(link => {
+    mobileLinks.forEach((link) => {
         link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            closeMenu();
+        }
     });
 }
 
-function closeMenu() {
-    burger.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.classList.remove('menu-open');
-}
+/* =========================
+   Header scroll behavior
+========================= */
 
-if (header) {
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+
+    if (!header) return;
+
     let lastScrollY = window.scrollY;
     let ticking = false;
 
     const updateHeader = () => {
         const currentScrollY = window.scrollY;
 
-        // сжатие хедера после прокрутки
-        if (currentScrollY > 30) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        header.classList.toggle('scrolled', currentScrollY > 30);
 
-        // если мобильное меню открыто — не скрываем хедер
         if (document.body.classList.contains('menu-open')) {
             header.classList.remove('header--hidden');
             lastScrollY = currentScrollY;
@@ -48,16 +89,11 @@ if (header) {
             return;
         }
 
-        // в самом верху страницы хедер всегда виден
         if (currentScrollY <= 10) {
             header.classList.remove('header--hidden');
-        }
-        // скроллим вниз — прячем
-        else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
             header.classList.add('header--hidden');
-        }
-        // скроллим вверх — показываем
-        else if (currentScrollY < lastScrollY) {
+        } else if (currentScrollY < lastScrollY) {
             header.classList.remove('header--hidden');
         }
 
@@ -65,104 +101,123 @@ if (header) {
         ticking = false;
     };
 
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(updateHeader);
-            ticking = true;
+    updateHeader();
+
+    window.addEventListener(
+        'scroll',
+        () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        },
+        { passive: true }
+    );
+}
+
+/* =========================
+   Smooth scroll
+========================= */
+
+function initSmoothScroll() {
+    const header = document.querySelector('.header');
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            const headerHeight = header ? header.offsetHeight : 0;
+            const topOffset = headerHeight + 20;
+            const topPosition =
+                target.getBoundingClientRect().top + window.pageYOffset - topOffset;
+
+            window.scrollTo({
+                top: topPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+
+/* =========================
+   Coach slider
+========================= */
+
+function initCoachSlider() {
+    if (typeof Swiper === 'undefined') return;
+
+    const slider = document.querySelector('.coach-slider');
+
+    if (!slider) return;
+
+    new Swiper('.coach-slider', {
+        loop: true,
+        speed: 800,
+        slidesPerGroup: 1,
+        centeredSlides: false,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        slidesPerView: 1.1,
+        spaceBetween: 16,
+
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+            waitForTransition: false
+        },
+
+        navigation: {
+            nextEl: '.coach-slider__btn--next',
+            prevEl: '.coach-slider__btn--prev'
+        },
+
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 18
+            },
+            1024: {
+                slidesPerView: 2.8,
+                spaceBetween: 24
+            }
         }
     });
 }
 
-// 3. Плавный скролл к секциям
+/* =========================
+   Coach modal
+========================= */
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const href = this.getAttribute('href');
-            if (!href || href === '#') return;
-
-            const target = document.querySelector(href);
-            if (!target) return;
-
-            const headerHeight = header?.offsetHeight || 0;
-            const topOffset = headerHeight + 20;
-
-            const topPos = target.getBoundingClientRect().top + window.pageYOffset - topOffset;
-
-            window.scrollTo({
-                top: topPos,
-                behavior: 'smooth'
-            });
-
-            if (burger && nav && nav.classList.contains('active')) {
-                burger.classList.remove('active');
-                nav.classList.remove('active');
-            }
-        });
-    });
-});
-
-
-// swiper + popupd
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.coach-slider') && typeof Swiper !== 'undefined') {
-        new Swiper('.coach-slider', {
-            loop: true,
-            loopedSlides: 4,
-            speed: 800,
-            slidesPerGroup: 1,
-            centeredSlides: false,
-            watchOverflow: true,
-            observer: true,
-            observeParents: true,
-
-            slidesPerView: 1.1,
-            spaceBetween: 16,
-
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-                waitForTransition: false
-            },
-
-            navigation: {
-                nextEl: '.coach-slider__btn--next',
-                prevEl: '.coach-slider__btn--prev',
-            },
-
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                    spaceBetween: 18,
-                },
-                1024: {
-                    slidesPerView: 2.8,
-                    spaceBetween: 24,
-                }
-            }
-        });
-    }
-
+function initCoachModal() {
     const coachModal = document.getElementById('coachModal');
     const coachCards = document.querySelectorAll('.coach-card');
 
-    if (!coachModal) return;
+    if (!coachModal || !coachCards.length) return;
 
-    const coachModalClose = coachModal.querySelector('.coach-modal__close');
-    const coachModalOverlay = coachModal.querySelector('.coach-modal__overlay');
+    const closeButton = coachModal.querySelector('.coach-modal__close');
+    const overlay = coachModal.querySelector('.coach-modal__overlay');
 
-    const coachModalPhoto = document.getElementById('coachModalPhoto');
-    const coachModalName = document.getElementById('coachModalName');
-    const coachModalRole = document.getElementById('coachModalRole');
-    const coachModalAchievements = document.getElementById('coachModalAchievements');
-    const coachModalVk = document.getElementById('coachModalVk');
-    const coachModalInst = document.getElementById('coachModalInst');
-    const coachModalTg = document.getElementById('coachModalTg');
+    const photoEl = document.getElementById('coachModalPhoto');
+    const nameEl = document.getElementById('coachModalName');
+    const roleEl = document.getElementById('coachModalRole');
+    const achievementsEl = document.getElementById('coachModalAchievements');
+    const vkEl = document.getElementById('coachModalVk');
+    const instEl = document.getElementById('coachModalInst');
+    const tgEl = document.getElementById('coachModalTg');
+    const signupLink = coachModal.querySelector('.coach-modal__btn');
 
-    function openCoachModal(card) {
+    const openModal = (card) => {
         const name = card.dataset.name || '';
         const photo = card.dataset.photo || '';
         const role = card.dataset.role || '';
@@ -171,175 +226,258 @@ document.addEventListener('DOMContentLoaded', () => {
         const inst = card.dataset.inst || '#';
         const tg = card.dataset.tg || '#';
 
-        coachModalPhoto.src = photo;
-        coachModalPhoto.alt = name;
-        coachModalName.textContent = name;
-        coachModalRole.textContent = role;
+        if (photoEl) {
+            photoEl.src = photo;
+            photoEl.alt = name;
+        }
 
-        coachModalAchievements.innerHTML = '';
+        if (nameEl) nameEl.textContent = name;
+        if (roleEl) roleEl.textContent = role;
 
-        achievements
-            .split('|')
-            .map(item => item.trim())
-            .filter(Boolean)
-            .forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                coachModalAchievements.appendChild(li);
-            });
+        if (achievementsEl) {
+            achievementsEl.innerHTML = '';
 
-        coachModalVk.href = vk;
-        coachModalInst.href = inst;
-        coachModalTg.href = tg;
+            achievements
+                .split('|')
+                .map((item) => item.trim())
+                .filter(Boolean)
+                .forEach((item) => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    achievementsEl.appendChild(li);
+                });
+        }
+
+        setSafeLink(vkEl, vk);
+        setSafeLink(instEl, inst);
+        setSafeLink(tgEl, tg);
 
         coachModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-    }
+    };
 
-    function closeCoachModal() {
+    const closeModal = () => {
         coachModal.classList.remove('active');
         document.body.style.overflow = '';
-    }
+    };
 
-    coachCards.forEach(card => {
-        card.addEventListener('click', () => openCoachModal(card));
+    coachCards.forEach((card) => {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+
+        card.addEventListener('click', () => openModal(card));
+
+        card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openModal(card);
+            }
+        });
     });
 
-    if (coachModalClose) {
-        coachModalClose.addEventListener('click', closeCoachModal);
+    if (closeButton) {
+        closeButton.addEventListener('click', closeModal);
     }
 
-    if (coachModalOverlay) {
-        coachModalOverlay.addEventListener('click', closeCoachModal);
+    if (overlay) {
+        overlay.addEventListener('click', closeModal);
     }
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && coachModal.classList.contains('active')) {
-            closeCoachModal();
+    if (signupLink) {
+        signupLink.addEventListener('click', closeModal);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && coachModal.classList.contains('active')) {
+            closeModal();
         }
     });
-});
+}
 
+function setSafeLink(element, url) {
+    if (!element) return;
 
-//  переключение окон филиалы
+    const safeUrl = String(url || '').trim();
 
-
-const branchButtons = document.querySelectorAll('.branches-tabs__btn');
-const branchPanes = document.querySelectorAll('.branches-pane');
-
-branchButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        const branch = button.dataset.branch;
-
-        branchButtons.forEach((btn) => btn.classList.remove('active'));
-        branchPanes.forEach((pane) => pane.classList.remove('active'));
-
-        button.classList.add('active');
-
-        const activePane = document.getElementById(`branch-${branch}`);
-        if (activePane) {
-            activePane.classList.add('active');
-        }
-    });
-});
-
-// seiper reviews
-
-const reviewTabs = document.querySelectorAll('.reviews-tabs__btn');
-const reviewPanes = document.querySelectorAll('.reviews-pane');
-
-reviewTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-        const tabName = tab.dataset.reviewTab;
-
-        reviewTabs.forEach((btn) => btn.classList.remove('active'));
-        reviewPanes.forEach((pane) => pane.classList.remove('active'));
-
-        tab.classList.add('active');
-
-        const activePane = document.getElementById(`reviews-${tabName}`);
-        if (activePane) {
-            activePane.classList.add('active');
-        }
-    });
-});
-
-const reviewsSwiperYandex = new Swiper('.reviews-swiper-yandex', {
-    slidesPerView: 1,
-    loop: true,
-    spaceBetween: 12,
-    speed: 700,
-    navigation: {
-        nextEl: '.reviews-slider__btn--next-yandex',
-        prevEl: '.reviews-slider__btn--prev-yandex',
-    },
-    breakpoints: {
-        640: {
-            slidesPerView: 1.2,
-            spaceBetween: 14,
-        },
-        768: {
-            slidesPerView: 2,
-            spaceBetween: 18,
-        },
-        1200: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-        }
+    if (!safeUrl || safeUrl === '#') {
+        element.href = '#';
+        element.style.display = 'none';
+        return;
     }
-});
 
-const reviewsSwiperGis = new Swiper('.reviews-swiper-gis', {
-    slidesPerView: 1,
-    loop: true,
-    spaceBetween: 12,
-    speed: 700,
-    navigation: {
-        nextEl: '.reviews-slider__btn--next-gis',
-        prevEl: '.reviews-slider__btn--prev-gis',
-    },
-    breakpoints: {
-        640: {
-            slidesPerView: 1.2,
-            spaceBetween: 14,
-        },
-        768: {
-            slidesPerView: 2,
-            spaceBetween: 18,
-        },
-        1200: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-        }
+    element.href = safeUrl;
+    element.style.display = '';
+}
+
+/* =========================
+   Branch tabs
+========================= */
+
+function initBranchesTabs() {
+    const buttons = document.querySelectorAll('.branches-tabs__btn');
+    const panes = document.querySelectorAll('.branches-pane');
+
+    if (!buttons.length || !panes.length) return;
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const branch = button.dataset.branch;
+
+            if (!branch) return;
+
+            buttons.forEach((btn) => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            panes.forEach((pane) => {
+                pane.classList.remove('active');
+            });
+
+            button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
+
+            const activePane = document.getElementById(`branch-${branch}`);
+
+            if (activePane) {
+                activePane.classList.add('active');
+            }
+        });
+    });
+}
+
+/* =========================
+   Reviews tabs
+========================= */
+
+function initReviewsTabs() {
+    const tabs = document.querySelectorAll('.reviews-tabs__btn');
+    const panes = document.querySelectorAll('.reviews-pane');
+
+    if (!tabs.length || !panes.length) return;
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.dataset.reviewTab;
+
+            if (!tabName) return;
+
+            tabs.forEach((btn) => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            panes.forEach((pane) => {
+                pane.classList.remove('active');
+            });
+
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            const activePane = document.getElementById(`reviews-${tabName}`);
+
+            if (activePane) {
+                activePane.classList.add('active');
+            }
+        });
+    });
+}
+
+/* =========================
+   Reviews sliders
+========================= */
+
+function initReviewsSliders() {
+    if (typeof Swiper === 'undefined') return;
+
+    if (document.querySelector('.reviews-swiper-yandex')) {
+        new Swiper('.reviews-swiper-yandex', {
+            slidesPerView: 1,
+            loop: true,
+            spaceBetween: 12,
+            speed: 700,
+
+            navigation: {
+                nextEl: '.reviews-slider__btn--next-yandex',
+                prevEl: '.reviews-slider__btn--prev-yandex'
+            },
+
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 14
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 18
+                },
+                1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                }
+            }
+        });
     }
-});
 
+    if (document.querySelector('.reviews-swiper-gis')) {
+        new Swiper('.reviews-swiper-gis', {
+            slidesPerView: 1,
+            loop: true,
+            spaceBetween: 12,
+            speed: 700,
 
+            navigation: {
+                nextEl: '.reviews-slider__btn--next-gis',
+                prevEl: '.reviews-slider__btn--prev-gis'
+            },
 
-//  form
-// form
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 14
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 18
+                },
+                1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                }
+            }
+        });
+    }
+}
 
-const signupForm = document.getElementById('signupForm');
-const trainingType = document.getElementById('trainingType');
-const trainerGroup = document.getElementById('trainerGroup');
-const trainerSelect = document.getElementById('trainerSelect');
-const signupPhone = document.getElementById('signupPhone');
-const signupSubmitBtn = document.getElementById('signupSubmitBtn');
-const signupBtnText = signupSubmitBtn ? signupSubmitBtn.querySelector('.btn-text') : null;
-const signupSuccessMessage = document.getElementById('signupSuccessMessage');
-const signupErrorMessage = document.getElementById('signupErrorMessage');
+/* =========================
+   Signup form
+========================= */
 
-if (
-    signupForm &&
-    trainingType &&
-    trainerGroup &&
-    trainerSelect &&
-    signupPhone &&
-    signupSubmitBtn &&
-    signupBtnText &&
-    signupSuccessMessage &&
-    signupErrorMessage
-) {
+function initSignupForm() {
+    const form = document.getElementById('signupForm');
+    const trainingType = document.getElementById('trainingType');
+    const trainerGroup = document.getElementById('trainerGroup');
+    const trainerSelect = document.getElementById('trainerSelect');
+    const phoneInput = document.getElementById('signupPhone');
+    const submitButton = document.getElementById('signupSubmitBtn');
+    const buttonText = submitButton ? submitButton.querySelector('.btn-text') : null;
+    const successMessage = document.getElementById('signupSuccessMessage');
+    const errorMessage = document.getElementById('signupErrorMessage');
+
+    if (
+        !form ||
+        !trainingType ||
+        !trainerGroup ||
+        !trainerSelect ||
+        !phoneInput ||
+        !submitButton ||
+        !buttonText ||
+        !successMessage ||
+        !errorMessage
+    ) {
+        return;
+    }
+
     const formStartTime = Date.now();
     let isSending = false;
 
@@ -355,73 +493,52 @@ if (
         }
     };
 
-    const setStatus = (type, message) => {
-        signupSuccessMessage.classList.remove('active');
-        signupErrorMessage.classList.remove('active');
+    const setStatus = (type, message = '') => {
+        successMessage.classList.remove('active');
+        errorMessage.classList.remove('active');
+
+        successMessage.textContent = '';
+        errorMessage.textContent = '';
 
         if (type === 'success') {
-            signupSuccessMessage.textContent = message;
-            signupSuccessMessage.classList.add('active');
+            successMessage.textContent = message;
+            successMessage.classList.add('active');
         }
 
         if (type === 'error') {
-            signupErrorMessage.textContent = message;
-            signupErrorMessage.classList.add('active');
+            errorMessage.textContent = message;
+            errorMessage.classList.add('active');
         }
     };
 
-    const formatPhone = (value) => {
-        const digits = value.replace(/\D/g, '').slice(0, 11);
-
-        let normalized = digits;
-
-        if (normalized.startsWith('8')) {
-            normalized = '7' + normalized.slice(1);
-        }
-
-        if (!normalized.startsWith('7') && normalized.length > 0) {
-            normalized = '7' + normalized.slice(0, 10);
-        }
-
-        let result = '+7';
-
-        if (normalized.length > 1) {
-            result += ' (' + normalized.slice(1, 4);
-        }
-
-        if (normalized.length >= 5) {
-            result += ') ' + normalized.slice(4, 7);
-        }
-
-        if (normalized.length >= 8) {
-            result += '-' + normalized.slice(7, 9);
-        }
-
-        if (normalized.length >= 10) {
-            result += '-' + normalized.slice(9, 11);
-        }
-
-        return result;
+    const setLoading = (state) => {
+        isSending = state;
+        submitButton.disabled = state;
+        buttonText.textContent = state ? 'ОТПРАВЛЯЕМ...' : 'ОТПРАВИТЬ ЗАЯВКУ';
     };
-
-    const getPhoneDigits = (value) => value.replace(/\D/g, '');
 
     trainingType.addEventListener('change', toggleTrainerField);
 
-    signupPhone.addEventListener('input', (event) => {
+    phoneInput.addEventListener('input', (event) => {
         event.target.value = formatPhone(event.target.value);
+    });
+
+    phoneInput.addEventListener('focus', () => {
+        if (!phoneInput.value.trim()) {
+            phoneInput.value = '+7';
+        }
     });
 
     toggleTrainerField();
 
-    signupForm.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         if (isSending) return;
 
-        setStatus('', '');
+        setStatus();
 
-        const formData = new FormData(signupForm);
+        const formData = new FormData(form);
 
         const name = String(formData.get('name') || '').trim();
         const phone = String(formData.get('phone') || '').trim();
@@ -434,13 +551,13 @@ if (
 
         if (!name || name.length < 2 || name.length > 80) {
             setStatus('error', 'Введите корректное имя.');
-            signupForm.name?.focus();
+            form.elements.name?.focus();
             return;
         }
 
         if (phoneDigits.length !== 11 || !/^7\d{10}$/.test(phoneDigits)) {
             setStatus('error', 'Введите корректный номер телефона в формате +7.');
-            signupPhone.focus();
+            phoneInput.focus();
             return;
         }
 
@@ -472,15 +589,13 @@ if (
             training_type: trainingTypeValue,
             trainer: trainerValue,
             message,
-            page: window.location.pathname,
+            page: window.location.href,
             form_time: formStartTime
         };
 
-        isSending = true;
-        signupSubmitBtn.disabled = true;
-        signupBtnText.textContent = 'Отправка...';
-
         try {
+            setLoading(true);
+
             const response = await fetch('/api/send', {
                 method: 'POST',
                 headers: {
@@ -489,7 +604,13 @@ if (
                 body: JSON.stringify(payload)
             });
 
-            const result = await response.json().catch(() => null);
+            let result = null;
+
+            try {
+                result = await response.json();
+            } catch {
+                result = null;
+            }
 
             if (!response.ok || !result?.success) {
                 throw new Error(result?.message || 'Не удалось отправить заявку.');
@@ -500,19 +621,54 @@ if (
                 result.message || 'Спасибо! Заявка отправлена, мы скоро свяжемся с вами.'
             );
 
-            signupForm.reset();
+            form.reset();
             toggleTrainerField();
+            phoneInput.value = '';
         } catch (error) {
-            console.error('Ошибка отправки формы:', error);
-
             setStatus(
                 'error',
-                error.message || 'Ошибка соединения. Попробуйте ещё раз чуть позже.'
+                error.message || 'Ошибка отправки. Попробуйте ещё раз чуть позже.'
             );
         } finally {
-            isSending = false;
-            signupSubmitBtn.disabled = false;
-            signupBtnText.textContent = 'Записаться на тренировку';
+            setLoading(false);
         }
     });
+}
+
+function formatPhone(value) {
+    const rawDigits = String(value || '').replace(/\D/g, '').slice(0, 11);
+
+    let normalized = rawDigits;
+
+    if (normalized.startsWith('8')) {
+        normalized = '7' + normalized.slice(1);
+    }
+
+    if (!normalized.startsWith('7') && normalized.length > 0) {
+        normalized = '7' + normalized.slice(0, 10);
+    }
+
+    let result = '+7';
+
+    if (normalized.length > 1) {
+        result += ` (${normalized.slice(1, 4)}`;
+    }
+
+    if (normalized.length >= 5) {
+        result += `) ${normalized.slice(4, 7)}`;
+    }
+
+    if (normalized.length >= 8) {
+        result += `-${normalized.slice(7, 9)}`;
+    }
+
+    if (normalized.length >= 10) {
+        result += `-${normalized.slice(9, 11)}`;
+    }
+
+    return result;
+}
+
+function getPhoneDigits(value) {
+    return String(value || '').replace(/\D/g, '');
 }
