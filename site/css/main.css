@@ -4110,6 +4110,13 @@ body.no-scroll {
   color: rgba(255, 255, 255, 0.82);
   max-width: 320px;
 }
+.footer__disclaimer {
+  max-width: 420px;
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+}
 .footer__socials {
   display: flex;
   align-items: center;

@@ -144,23 +144,23 @@ body.no-scroll {
   text-align: center;
 
   .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  white-space: nowrap;
-  border: 0;
-  clip: rect(0 0 0 0);
-}
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0 0 0 0);
+  }
 
   &__overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: rgba(0, 0, 0, 0 );
+    background: rgba(0, 0, 0, 0);
   }
 
   &-container {
@@ -4961,6 +4961,14 @@ body.no-scroll {
     line-height: 1.5;
     color: $white-soft;
     max-width: 320px;
+  }
+
+  &__disclaimer {
+    max-width: 420px;
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   &__socials {
